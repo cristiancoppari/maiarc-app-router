@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 
 type SectionProps = {
-  title?: string;
+  title?: string | null;
   text?: string;
   children?: ReactNode;
   classes?: string;

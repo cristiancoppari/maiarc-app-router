@@ -12,20 +12,21 @@ type DestinosGridProps = {
 
 function DestinosComponent({ destinations }: DestinosGridProps) {
   const queryParams = useSearchParams();
-  const service = queryParams.get("service");
+  const serviceSelector = queryParams.get("serviceSelector");
+  const serviceName = queryParams.get("serviceName");
 
   return (
     <div className="container grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
       {destinations
         .sort((a, b) => a.order - b.order)
-        .map((destination) => (
-          <Link
-            href={`/destinos/${destination.slug}/${service ? "?service=" + service : ""}&hideCards=true`}
-            key={destination.id}
-          >
-            <ImageTitle classes="capitalize" title={destination.name} image={destination.mainImage} />
-          </Link>
-        ))}
+        .map((destination) => {
+          const slug = `/destinos/${destination.slug}/${serviceSelector ? "?serviceSelector=" + serviceSelector : ""}&${serviceName ? "serviceName=" + serviceName : ""}&hideCards=true`;
+          return (
+            <Link href={slug} key={destination.id}>
+              <ImageTitle classes="capitalize" title={destination.name} image={destination.mainImage} />
+            </Link>
+          );
+        })}
     </div>
   );
 }
