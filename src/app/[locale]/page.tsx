@@ -13,8 +13,8 @@ import { getHomeData } from "@/data/fetchers";
 import { Locale } from "@/constants/locale";
 
 export const metadata: Metadata = {
-  title: "Maiarc Concierge",
-  description: "Maiarc Concierge",
+  title: "Maiarc Concierge Agency - Home",
+  description: "Maiarc Concierge Agency - Home",
 };
 
 type HomePageProps = {

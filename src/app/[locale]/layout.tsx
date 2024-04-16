@@ -1,5 +1,3 @@
-import type { Metadata } from "next";
-
 import { montserrat } from "@/constants/fonts";
 import Header from "@/components/layout/header";
 import Footer from "@/components/footer";
