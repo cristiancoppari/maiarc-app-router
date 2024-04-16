@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 
-import Hero from "@/app/components/hero";
-import Section from "@/app/components/section";
-import ClickableServices from "@/app/components/clickable-services";
-import { CarouselServices } from "@/app/components/carousel";
+import Hero from "@/components/hero";
+import Section from "@/components/section";
+import ClickableServices from "@/components/clickable-services";
+import { CarouselServices } from "@/components/carousel";
+import { LinkButton } from "@/components/buttons/buttons";
 
+import { getCtasData } from "@/lang/translations";
 import { getHomeData } from "@/app/data/fetchers";
 import { Locale } from "@/constants/locale";
 
@@ -21,6 +23,7 @@ type HomePageProps = {
 
 export default async function HomePage({ params: { locale } }: HomePageProps) {
   const homeData = await getHomeData(locale as Locale);
+  const { more } = await getCtasData();
 
   const { hero, servicesBlock, clickableServices } = homeData;
 
@@ -31,6 +34,7 @@ export default async function HomePage({ params: { locale } }: HomePageProps) {
       <Section title={servicesBlock.title} text={servicesBlock.text}>
         <ClickableServices services={clickableServices} />
         <CarouselServices services={servicesBlock.services} />
+        <LinkButton link="/contacto" text={more} />
       </Section>
     </main>
   );

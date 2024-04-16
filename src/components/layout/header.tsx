@@ -8,8 +8,8 @@ import { useLocale } from "next-intl";
 import { motion } from "framer-motion";
 import { Link } from "@/lang/navigation";
 
-import Burger from "@/app/components/buttons/burger";
-import Arrow from "@/app/components/arrow";
+import Burger from "@/components/buttons/burger";
+import Arrow from "@/components/arrow";
 
 import useDesktop from "@/hooks/useDesktop";
 import { cn } from "@/lib/utils";
