@@ -2,32 +2,188 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+html {
+  scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* body {
+  @apply bg-background text-foreground;
+} */
+
+/*
+Used sections
+*/
+.h1 {
+  @apply text-2xl font-medium md:text-3xl;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/*
+Used in subtitles
+*/
+.h2 {
+  @apply text-xl font-normal md:text-2xl;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/*
+Used in big cards
+*/
+.h3 {
+  @apply text-xl font-medium md:text-2xl;
+}
+
+/*
+Used in service cards
+*/
+.h4 {
+  @apply text-lg font-medium md:text-xl;
+}
+
+.p {
+  @apply text-base font-light;
+}
+
+.--font-lora {
+  font-family: var(--font-lora);
+}
+
+.carousel-hero .splide__track {
+  @apply h-full;
+}
+
+.section-padding {
+  @apply px-8 py-12 lg:py-24;
+}
+
+/* Change the color of the inactive dots */
+.swiper-pagination-bullet {
+  @apply h-4 w-4 border-2 bg-zinc-900 opacity-80 !important;
+}
+
+/* Change the color of the active dot */
+.swiper-pagination-bullet-active {
+  @apply h-4 w-4 bg-black !important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  @apply text-zinc-100;
+}
+
+.normal-carousel .swiper-button-prev,
+.normal-carousel .swiper-button-next {
+  @apply w-11 rounded-full border border-black bg-zinc-100 text-black;
+}
+
+.normal-carousel .swiper-button-prev::after,
+.normal-carousel .swiper-button-next::after {
+  @apply text-2xl;
+}
+
+.normal-carousel .swiper-button-next {
+  @apply right-8;
+}
+
+.normal-carousel .swiper-button-prev {
+  @apply left-8;
+}
+
+/* Change the color of the inactive dots */
+.modal-bullets .swiper-pagination-bullet {
+  @apply bg-zinc-200 !important;
+}
+
+/* Change the color of the active dot */
+.modal-bullets .swiper-pagination-bullet-active {
+  @apply bg-zinc-100 !important;
+}
+
+.custom-pagination {
+  @apply mx-auto;
+  @apply translate-x-0 !important;
+}
+
+.arrow {
+  @apply opacity-0;
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.--active .arrow {
+  @apply opacity-100;
+}
+
+.nav-link:hover .arrow {
+  @apply opacity-100;
+}
+
+.menu-toggle {
+  width: 1.5rem;
+  height: 1.5rem;
+  position: relative;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  display: block;
+  position: absolute;
+  height: 0.2rem;
+  width: 100%;
+  @apply bg-slate-100;
+  border-radius: 0.5rem;
+  opacity: 1;
+  left: 0;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: 0.25s ease-in-out;
+  -moz-transition: 0.25s ease-in-out;
+  -o-transition: 0.25s ease-in-out;
+  transition: 0.25s ease-in-out;
+}
+
+.menu-toggle span:nth-child(1) {
+  top: 0px;
+}
+
+.menu-toggle span:nth-child(2),
+.menu-toggle span:nth-child(3) {
+  top: 0.5rem;
+}
+
+.menu-toggle span:nth-child(4) {
+  top: 1rem;
+}
+
+.menu-toggle.open span:nth-child(1) {
+  top: 0.5rem;
+  width: 0%;
+  left: 50%;
+}
+
+.menu-toggle.open span:nth-child(2) {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.menu-toggle.open span:nth-child(3) {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.menu-toggle.open span:nth-child(4) {
+  top: 0.5rem;
+  width: 0%;
+  left: 50%;
 }
