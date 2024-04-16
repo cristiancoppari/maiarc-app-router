@@ -1,5 +1,1 @@
-export type Service = {
-  mainImage: string;
-  name: string;
-  description: string;
-};
+export type ClickableServicesSelector = "luxuryAccommodations" | "yatchs" | "premiumVehicles";

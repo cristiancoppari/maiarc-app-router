@@ -228,7 +228,7 @@ export const getDestinoPageData = async (locale: string) => {
           mainImage: service.attributes.main_image.data.attributes.url || FALLBACK_IMAGE,
           selector: service.attributes.selector,
           tulumImg: service.attributes.tulum_img.data?.attributes.url || FALLBACK_IMAGE,
-          pde_img: service.attributes.pde_img.data?.attributes.url || FALLBACK_IMAGE,
+          pdeImg: service.attributes.pde_img.data?.attributes.url || FALLBACK_IMAGE,
           miamiImg: service.attributes.miami_img.data?.attributes.url || FALLBACK_IMAGE,
           ibizaImg: service.attributes.ibiza_img.data?.attributes.url || FALLBACK_IMAGE,
         };

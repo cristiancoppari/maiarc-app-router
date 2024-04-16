@@ -35,15 +35,41 @@ export default async function DestinosPage({ params: { locale, destino } }: Expe
 
   const destinoPageData = await getDestinoPageData(locale as Locale);
 
-  const { title, texts, heroImages } = destinoPageData;
+  const { title, texts, heroImages, services } = destinoPageData;
 
   const sectionText = texts[destino]; // Text for the destination
   const images = heroImages[destino]; // Images for the destination
 
+  const parsedServices = services.map((service) => {
+    let mainImage = service.mainImage;
+
+    switch (destino) {
+      case "ibiza":
+        mainImage = service.ibizaImg;
+        break;
+      case "tulum":
+        mainImage = service.tulumImg;
+        break;
+      case "miami":
+        mainImage = service.miamiImg;
+        break;
+      case "punta-del-este":
+        mainImage = service.pdeImg;
+        break;
+    }
+
+    return {
+      id: service.id,
+      name: service.name,
+      mainImage,
+      selector: service.selector,
+    };
+  });
+
   return (
     <main>
       <Hero images={images}></Hero>
-      <FilterServices sectionTitle={title} sectionText={sectionText} destination={destino} />
+      <FilterServices sectionTitle={title} sectionText={sectionText} destination={destino} services={parsedServices} />
     </main>
   );
 }
