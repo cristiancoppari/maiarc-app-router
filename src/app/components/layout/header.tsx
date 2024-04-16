@@ -67,19 +67,16 @@ export default function Header({ leftNavKeys, rightNavKeys, destinationsKeys }: 
       </div>
       <div className="bg-black/90">
         <div className={cn("container mx-auto flex h-16 items-center justify-between md:h-24 md:justify-center")}>
-          {!isDesktop && (
-            <Link href="/">
-              <img src="/images/logo-gray.png" alt="" className="h-auto w-20" />
-            </Link>
-          )}
+          <Link href="/" className="block md:hidden">
+            <img src="/images/logo-gray.png" alt="" className="h-auto w-20" />
+          </Link>
 
           <Burger classes="block md:hidden" onClick={toggleMenu} isOpen={isMenuOpen} />
 
           <ul
             className={cn(
-              "absolute right-0 top-24 z-20 w-full flex-col justify-around transition-colors duration-500 md:relative md:top-0 md:h-full md:flex-row md:items-center md:border-none",
-              isMenuOpen || isDesktop ? "flex" : "hidden",
-              isMenuOpen && "bg-black",
+              "absolute right-0 top-24 z-20 hidden w-full flex-col justify-around transition-colors duration-500 md:relative md:top-0 md:flex md:h-full md:flex-row md:items-center md:border-none",
+              isMenuOpen && "flex bg-black",
             )}
           >
             {leftNavKeys.map((link) => {
@@ -139,11 +136,9 @@ export default function Header({ leftNavKeys, rightNavKeys, destinationsKeys }: 
               }
             })}
 
-            {isDesktop && (
-              <Link href="/">
-                <img src="/images/logo-gray.png" alt="" className="h-auto w-20" />
-              </Link>
-            )}
+            <Link href="/" className="hidden md:block">
+              <img src="/images/logo-gray.png" alt="" className="h-auto w-20" />
+            </Link>
 
             {rightNavKeys.map((link) => {
               return (
