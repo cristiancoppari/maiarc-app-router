@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { montserrat } from "@/constants/fonts";
 import Header from "@/components/layout/header";
 import Footer from "@/components/footer";
+import WhatsappButton from "@/components/buttons/buttons";
 import { useHeaderTranslations, useFooterTranslations } from "@/lang/translations";
 
 export default function RootLayout({
@@ -22,6 +23,7 @@ export default function RootLayout({
         <Header {...headerProps} />
         {children}
         <Footer content={content} />
+        <WhatsappButton />
       </body>
     </html>
   );

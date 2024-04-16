@@ -30,3 +30,13 @@ export function Button({ text, classes, type }: ButtonProps) {
     </BaseButton>
   );
 }
+
+export function WhatsappButton() {
+  return (
+    <a href="https://api.whatsapp.com/send?phone=529842028334" className="fixed bottom-12 right-12 z-10">
+      <img src={"/images/whatsapp.svg"} alt="Maiarc Concierce" className="w-12" />
+    </a>
+  );
+}
+
+export default WhatsappButton;
