@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 
+import { unstable_setRequestLocale as setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+
 import Hero from "@/components/hero";
 import Section from "@/components/section";
 import ClickableServices from "@/components/clickable-services";
@@ -24,6 +27,8 @@ type HomePageProps = {
 };
 
 export default async function HomePage({ params: { locale } }: HomePageProps) {
+  setRequestLocale(locale);
+
   const homeData = await getHomeData(locale as Locale);
   const { more, subscription } = await getCtasData();
 

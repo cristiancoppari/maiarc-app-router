@@ -1,5 +1,7 @@
 "use client";
 
+import { Suspense } from "react";
+
 import { Link } from "@/lang/navigation";
 import ImageTitle from "@/components/image-title";
 import { useSearchParams } from "next/navigation";
@@ -8,7 +10,7 @@ type DestinosGridProps = {
   destinations: any[];
 };
 
-export default function DestinosGrid({ destinations }: DestinosGridProps) {
+function DestinosComponent({ destinations }: DestinosGridProps) {
   const queryParams = useSearchParams();
   const service = queryParams.get("service");
 
@@ -25,5 +27,14 @@ export default function DestinosGrid({ destinations }: DestinosGridProps) {
           </Link>
         ))}
     </div>
+  );
+}
+
+// https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout
+export default function DestinosGrid({ destinations }: DestinosGridProps) {
+  return (
+    <Suspense>
+      <DestinosComponent destinations={destinations} />
+    </Suspense>
   );
 }

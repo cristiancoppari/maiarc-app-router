@@ -1,12 +1,13 @@
+import type { Locale } from "@/constants/locale";
+
 import type { Root as ApiResponseHomePage } from "@/types/api/api-home-data";
 import type { Root as ApiResponseAboutUsPage } from "@/types/api/api-about-us-data";
 import type { Root as ApiResponsePremiumServicePage } from "@/types/api/api-premium-service-data";
+import type { Root as ApiResponseDestinoPage } from "@/types/api/api-destino-page-data";
 import type { Root as ApiResponseDestinosPage } from "@/types/api/api-destinos-page-data";
 import type { Root as ApiResponseContactPage } from "@/types/api/api-contact-page-data";
 
 import type { Root as ApiResponseDestinations } from "@/types/api/api-destinations-data";
-
-import type { Locale } from "@/constants/locale";
 
 const FALLBACK_IMAGE = "/images/default.jpeg";
 
@@ -198,6 +199,51 @@ export const getContactPageData = async (locale: string) => {
     };
 
     return contactPageData;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Hubo un error");
+  }
+};
+
+export const getDestinoPageData = async (locale: string) => {
+  try {
+    const res = await fetch(`${process.env.API_URL}/destino-page/?populate=deep&locale=${locale}`);
+
+    const data: ApiResponseDestinoPage = await res.json();
+
+    if (!res.ok) throw new Error("Failed to fetch destino page data");
+
+    const destinoPageData = {
+      title: data.data.attributes.title,
+      texts: {
+        miami: data.data.attributes.miami_text,
+        ibiza: data.data.attributes.ibiza_text,
+        tulum: data.data.attributes.tulum_text,
+        "punta-del-este": data.data.attributes.pde_text,
+      },
+      services: data.data.attributes.clickable_services.data.map((service) => {
+        return {
+          id: service.id,
+          name: service.attributes.name,
+          mainImage: service.attributes.main_image.data.attributes.url || FALLBACK_IMAGE,
+          selector: service.attributes.selector,
+          tulumImg: service.attributes.tulum_img.data?.attributes.url || FALLBACK_IMAGE,
+          pde_img: service.attributes.pde_img.data?.attributes.url || FALLBACK_IMAGE,
+          miamiImg: service.attributes.miami_img.data?.attributes.url || FALLBACK_IMAGE,
+          ibizaImg: service.attributes.ibiza_img.data?.attributes.url || FALLBACK_IMAGE,
+        };
+      }),
+      heroImages: {
+        ibiza: data.data.attributes.images_ibiza.data.map((image) => image.attributes.url || FALLBACK_IMAGE),
+        tulum: data.data.attributes.images_tulum.data.map((image) => image.attributes.url || FALLBACK_IMAGE),
+        miami: data.data.attributes.images_miami.data.map((image) => image.attributes.url || FALLBACK_IMAGE),
+        "punta-del-este": data.data.attributes.images_punta_del_este.data.map(
+          (image) => image.attributes.url || FALLBACK_IMAGE,
+        ),
+      },
+    };
+
+    return destinoPageData;
   } catch (error) {
     console.error(error);
     throw new Error("Hubo un error");
