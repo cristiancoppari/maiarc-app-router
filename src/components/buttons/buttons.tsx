@@ -14,7 +14,7 @@ type LinkButtonProps = {
 
 export function LinkButton({ link, text, classes }: LinkButtonProps) {
   return (
-    <BaseButton asChild className={cn("my-16 rounded-full px-12 uppercase", classes || "")}>
+    <BaseButton asChild className={cn("rounded-full px-12 uppercase", classes || "")}>
       <Link href={link}>{text}</Link>
     </BaseButton>
   );

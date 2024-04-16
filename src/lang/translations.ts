@@ -36,5 +36,6 @@ export async function getCtasData() {
 
   return {
     more: t("more"),
+    subscription: t("subscription"),
   };
 }

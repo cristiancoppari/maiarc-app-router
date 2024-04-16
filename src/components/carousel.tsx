@@ -59,3 +59,17 @@ export function CarouselServices({ services }: CarouselServicesProps) {
     </Carousel>
   );
 }
+
+export function AccommodationsCarousel({ services }: CarouselServicesProps) {
+  return (
+    <Carousel>
+      {services.map((service) => {
+        return (
+          <SwiperSlide key={service.id} className="px-4 pb-12">
+            <ImageTitle image={service.mainImage} title={service.name} />
+          </SwiperSlide>
+        );
+      })}
+    </Carousel>
+  );
+}

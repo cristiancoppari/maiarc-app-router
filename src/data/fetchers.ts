@@ -37,6 +37,28 @@ export async function getHomeData(locale: Locale) {
           };
         }),
       },
+      premiumServicesBlock: {
+        services: data.data.attributes.premium_services_block.items.data.map((item) => {
+          return {
+            id: item.id,
+            name: item.attributes.name,
+            mainImage: item.attributes.main_image.data.attributes.url || FALLBACK_IMAGE,
+            description: item.attributes.description,
+          };
+        }),
+      },
+      accommodationsBlock: {
+        title: data.data.attributes.accommodations_block.title,
+        text: data.data.attributes.accommodations_block.text,
+      },
+      communityBlock: {
+        title: data.data.attributes.community_block.title,
+        text: data.data.attributes.community_block.text,
+      },
+      newsletterBlock: {
+        title: data.data.attributes.newsletter_block.title,
+        text: data.data.attributes.newsletter_block.text,
+      },
     };
 
     return homePageData;
