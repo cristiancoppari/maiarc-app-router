@@ -72,7 +72,7 @@
           "pattern": "You have to enter more than 1 character"
         }
       },
-      "date_start": {
+      "dateStart": {
         "label": "Start date",
         "placeholder": "Select a date",
         "error": {
@@ -80,7 +80,7 @@
           "pattern": "You have to enter a valid date"
         }
       },
-      "date_end": {
+      "dateEnd": {
         "label": "End date",
         "placeholder": "Select a date",
         "error": {

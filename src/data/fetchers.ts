@@ -2,6 +2,7 @@ import type { Root as ApiResponseHomePage } from "@/types/api/api-home-data";
 import type { Root as ApiResponseAboutUsPage } from "@/types/api/api-about-us-data";
 import type { Root as ApiResponsePremiumServicePage } from "@/types/api/api-premium-service-data";
 import type { Root as ApiResponseDestinosPage } from "@/types/api/api-destinos-page-data";
+import type { Root as ApiResponseContactPage } from "@/types/api/api-contact-page-data";
 
 import type { Root as ApiResponseDestinations } from "@/types/api/api-destinations-data";
 
@@ -9,6 +10,7 @@ import type { Locale } from "@/constants/locale";
 
 const FALLBACK_IMAGE = "/images/default.jpeg";
 
+// pages
 export async function getHomeData(locale: Locale) {
   try {
     const res = await fetch(`${process.env.API_URL}/home-page/?populate=deep&locale=${locale}`);
@@ -118,7 +120,6 @@ export async function getAboutUsPageData(locale: string) {
   }
 }
 
-// real estate and super yachts
 export const getPremiumServicePageData = async (locale: string, service: string) => {
   try {
     const res = await fetch(`${process.env.API_URL}/${service}-page/?populate=deep&locale=${locale}`);
@@ -170,6 +171,33 @@ export const getDestinosPageData = async (locale: string) => {
     };
 
     return destinosPageData;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Hubo un error");
+  }
+};
+
+export const getContactPageData = async (locale: string) => {
+  try {
+    const res = await fetch(`${process.env.API_URL}/contact-page/?populate=deep&locale=${locale}`);
+
+    if (!res.ok) throw new Error("Failed to fetch contact page data");
+
+    const data: ApiResponseContactPage = await res.json();
+
+    const contactPageData = {
+      hero: {
+        images: data.data.attributes.hero.images.data.map((image) => {
+          return image.attributes.url;
+        }),
+      },
+      block1: {
+        title: data.data.attributes.block_1.title,
+        text: data.data.attributes.block_1.text,
+      },
+    };
+
+    return contactPageData;
   } catch (error) {
     console.error(error);
     throw new Error("Hubo un error");

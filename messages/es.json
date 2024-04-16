@@ -64,7 +64,7 @@
           "pattern": "Tienes que ingresar mas de 1 caracter"
         }
       },
-      "date_start": {
+      "dateStart": {
         "label": "Fecha de inicio",
         "placeholder": "Selecciona una fecha",
         "error": {
@@ -72,7 +72,7 @@
           "pattern": "Tienes que ingresar una fecha válida"
         }
       },
-      "date_end": {
+      "dateEnd": {
         "label": "Fecha de fin",
         "placeholder": "Selecciona una fecha",
         "error": {

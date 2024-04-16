@@ -1,6 +1,9 @@
+import { sub } from "date-fns";
 import { useTranslations } from "next-intl";
 
 import { getTranslations } from "next-intl/server";
+import test from "node:test";
+import { send } from "process";
 
 const leftNavKeys = ["quienes-somos", "destinos", "real-estate"];
 const rightNavKeys = ["experiencias-unicas", "super-yates", "contacto"];
@@ -45,5 +48,52 @@ export async function getCtasData() {
   return {
     more: t("more"),
     subscription: t("subscription"),
+  };
+}
+
+export async function getContactPageTranslations() {
+  const t = await getTranslations("contact");
+
+  return {
+    form: {
+      name: {
+        label: t("form.name.label"),
+        placeholder: t("form.name.placeholder"),
+      },
+      prefix: {
+        label: t("form.prefix.label"),
+        placeholder: t("form.prefix.placeholder"),
+      },
+      phone: {
+        label: t("form.phone.label"),
+        placeholder: t("form.phone.placeholder"),
+      },
+      email: {
+        label: t("form.email.label"),
+        placeholder: t("form.email.placeholder"),
+      },
+      destinations: {
+        label: t("form.destinations.label"),
+        placeholder: t("form.destinations.placeholder"),
+      },
+      message: {
+        label: t("form.message.label"),
+        placeholder: t("form.message.placeholder"),
+      },
+      dateStart: {
+        label: t("form.dateStart.label"),
+        placeholder: t("form.dateStart.placeholder"),
+      },
+      dateEnd: {
+        label: t("form.dateEnd.label"),
+        placeholder: t("form.dateEnd.placeholder"),
+      },
+      submit: t("form.submit"),
+    },
+    messages: {
+      success: t("messages.success"),
+      error: t("messages.error"),
+      sending: t("messages.sending"),
+    },
   };
 }
