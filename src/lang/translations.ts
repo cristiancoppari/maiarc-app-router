@@ -31,6 +31,14 @@ export function useHeaderTranslations() {
   };
 }
 
+export function useFooterTranslations() {
+  const t = useTranslations("footer");
+
+  return {
+    content: t("content"),
+  };
+}
+
 export async function getCtasData() {
   const t = await getTranslations("ctas");
 

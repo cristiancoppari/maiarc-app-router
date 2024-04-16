@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 
 import { montserrat } from "@/constants/fonts";
 import Header from "@/components/layout/header";
-import { useHeaderTranslations } from "@/lang/translations";
+import Footer from "@/components/Footer";
+import { useHeaderTranslations, useFooterTranslations } from "@/lang/translations";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,14 +18,15 @@ export default function RootLayout({
   params: { locale: string };
 }) {
   const { leftNavKeys, rightNavKeys, destinationsKeys } = useHeaderTranslations();
+  const { content } = useFooterTranslations();
   const headerProps = { leftNavKeys, rightNavKeys, destinationsKeys };
 
   return (
     <html lang={locale}>
       <body className={montserrat.className}>
         <Header {...headerProps} />
-
         {children}
+        <Footer content={content} />
       </body>
     </html>
   );
