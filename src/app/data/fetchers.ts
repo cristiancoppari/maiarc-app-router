@@ -18,7 +18,26 @@ export async function getHomeData(locale: Locale) {
           return image.attributes.url || FALLBACK_IMAGE;
         }),
       },
-    } as const;
+      clickableServices: data.data.attributes.clickable_services.data.map((service) => {
+        return {
+          id: service.id,
+          name: service.attributes.name,
+          mainImage: service.attributes.main_image.data.attributes.url,
+          selector: service.attributes.selector,
+        };
+      }),
+      servicesBlock: {
+        title: data.data.attributes.services_block.title,
+        text: data.data.attributes.services_block.text,
+        services: data.data.attributes.services_block.services.data.map((service) => {
+          return {
+            id: service.id,
+            name: service.attributes.name,
+            mainImage: service.attributes.main_image.data.attributes.url || FALLBACK_IMAGE,
+          };
+        }),
+      },
+    };
 
     return homePageData;
   } catch (error) {
