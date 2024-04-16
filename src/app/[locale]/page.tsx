@@ -45,7 +45,7 @@ export default async function HomePage({ params: { locale } }: HomePageProps) {
         <ClickableServices services={clickableServices} />
         <CarouselServices services={servicesBlock.services} />
         <LinkButton link="/contacto" text={more} classes="my-16" />
-        <BigGallery services={premiumServicesBlock.services} cta={more} />
+        <BigGallery items={premiumServicesBlock.services} cta={more} />
       </Section>
 
       <Section title={accommodationsBlock.title} text={accommodationsBlock.text} classes="bg-zinc-200">

@@ -8,7 +8,7 @@ type BigImageProps = {
   cta_label?: string;
 };
 
-function BigImage({ title, image, description, link, cta_label }: BigImageProps) {
+export default function BigImage({ title, image, description, link, cta_label }: BigImageProps) {
   return (
     <div className="flex flex-col shadow-xl">
       <img src={image} alt="" className="mx-auto aspect-square w-full" />
@@ -23,5 +23,3 @@ function BigImage({ title, image, description, link, cta_label }: BigImageProps)
     </div>
   );
 }
-
-export default BigImage;

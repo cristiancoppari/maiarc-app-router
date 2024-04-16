@@ -1,4 +1,5 @@
 import type { Root as ApiResponseHomePage } from "@/types/api/api-home-data";
+import type { Root as ApiResponseAboutUsPage } from "@/types/api/api-about-us-data";
 
 import type { Locale } from "@/constants/locale";
 
@@ -65,5 +66,50 @@ export async function getHomeData(locale: Locale) {
   } catch (error) {
     console.error(error);
     throw new Error("Failed to fetch home data");
+  }
+}
+
+export async function getAboutUsPageData(locale: string) {
+  try {
+    const res = await fetch(`${process.env.API_URL}/about-us/?populate=deep&locale=${locale}`);
+
+    if (!res.ok) throw new Error("Failed to fetch home data");
+
+    const data: ApiResponseAboutUsPage = await res.json();
+
+    const aboutUsPageData = {
+      images: data.data.attributes.images.images.data.map((image) => {
+        return image.attributes.url;
+      }),
+      section1: {
+        title: data.data.attributes.section_1.title,
+        text: data.data.attributes.section_1.text,
+        style: data.data.attributes.section_1.style,
+        image: data.data.attributes.section_1.image,
+        mainImage: data.data.attributes.section_1.main_image.data.attributes.url,
+      },
+      block1: {
+        name: data.data.attributes.block_1.title,
+        description: data.data.attributes.block_1.text,
+        mainImage: data.data.attributes.block_1.main_image.data.attributes.url,
+      },
+      block2: {
+        name: data.data.attributes.block_2.title,
+        description: data.data.attributes.block_2.text,
+        mainImage: data.data.attributes.block_2.main_image.data.attributes.url,
+      },
+      blockWithBackground: {
+        title1: data.data.attributes.block_with_background.title_1,
+        title2: data.data.attributes.block_with_background.title_2,
+        text: data.data.attributes.block_with_background.text,
+        backgroundImage:
+          data.data.attributes.block_with_background.background_image.data.attributes.url || FALLBACK_IMAGE,
+      },
+    };
+
+    return aboutUsPageData;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Hubo un error");
   }
 }

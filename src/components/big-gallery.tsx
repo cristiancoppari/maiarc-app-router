@@ -1,30 +1,34 @@
+import type { Service } from "@/types/services";
+
 import BigImage from "@/components/big-card";
-import { Service } from "@/types/services";
+
+import { cn } from "@/lib/utils";
 
 interface BigGalleryProps {
-  services: Service[];
-  cta: string;
+  items: Service[];
+  cta?: string;
+  classNames?: string;
 }
 
-export default function BigGallery({ services, cta }: BigGalleryProps) {
-  const [service_1, service_2] = services;
+export default function BigGallery({ items, cta, classNames }: BigGalleryProps) {
+  const [item1, item2] = items;
 
   return (
-    <div className="md:w-6/7 sm:w-7/8 mx-auto grid grid-cols-1 gap-4 md:grid-cols-2 lg:w-11/12">
+    <div className={cn("md:w-6/7 sm:w-7/8 mx-auto grid grid-cols-1 gap-4 md:grid-cols-2 lg:w-11/12", classNames || "")}>
       <BigImage
-        image={service_1.mainImage}
-        title={service_1.name}
-        link={"/experiencias-unicas"}
-        description={service_1.description ?? ""}
-        cta_label={cta}
+        image={item1.mainImage}
+        title={item1.name}
+        link={cta ? "/experiencias-unicas" : ""}
+        description={item1.description ?? ""}
+        cta_label={cta || ""}
       />
 
       <BigImage
-        image={service_2.mainImage}
-        title={service_2.name}
-        link={"/super-yates"}
-        description={service_2.description ?? ""}
-        cta_label={cta}
+        image={item2.mainImage}
+        title={item2.name}
+        link={cta ? "/super-yates" : ""}
+        description={item2.description ?? ""}
+        cta_label={cta || ""}
       />
     </div>
   );
