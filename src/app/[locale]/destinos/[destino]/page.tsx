@@ -41,9 +41,14 @@ export default async function DestinosPage({ params: { locale, destino } }: Expe
 
   const destinoPageData = await getDestinoPageData(locale as Locale);
 
-  const sectionTitle = DESTINATION_NAMES[destino];
-
   const { title, texts } = destinoPageData;
 
-  return <main>{/* <Section title={title} text={text} container classes="mt-24"></Section> */}</main>;
+  const sectionTitle = `${title} ${DESTINATION_NAMES[destino]}`;
+  const sectionText = texts[destino];
+
+  return (
+    <main>
+      <Section title={sectionTitle} text={sectionText} container classes="mt-24"></Section>
+    </main>
+  );
 }
