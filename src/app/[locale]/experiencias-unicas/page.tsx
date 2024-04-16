@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 
-import ReactMarkdown from "react-markdown";
+import { Locale } from "@/constants/locale";
 
 import Hero from "@/components/hero";
+import Section from "@/components/section";
 import TextImage from "@/components/text-image";
+import { LinkButton } from "@/components/buttons/buttons";
 
 import { getPremiumServicePageData } from "@/data/fetchers";
-import { Locale } from "@/constants/locale";
-import { LinkButton } from "@/components/buttons/buttons";
-import Section from "@/components/section";
 
 export const metadata: Metadata = {
   title: "Maiarc Concierge",

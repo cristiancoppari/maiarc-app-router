@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 
-import { getDestinosPageData, getDestinations } from "@/data/fetchers";
 import { Locale } from "@/constants/locale";
 
 import Section from "@/components/section";
 import DestinosGrid from "@/components/destinos-grid";
 import { LinkButton } from "@/components/buttons/buttons";
+
+import { getDestinosPageData, getDestinations } from "@/data/fetchers";
 
 export const metadata: Metadata = {
   title: "Maiarc Concierge - Destinations",

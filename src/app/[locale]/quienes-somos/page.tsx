@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import ReactMarkdown from "react-markdown";
+import { Locale } from "@/constants/locale";
 
 import Hero from "@/components/hero";
 import TextImage from "@/components/text-image";
@@ -8,7 +8,6 @@ import BigGallery from "@/components/big-gallery";
 import TextWithBackground from "@/components/text-with-background";
 
 import { getAboutUsPageData } from "@/data/fetchers";
-import { Locale } from "@/constants/locale";
 
 export const metadata: Metadata = {
   title: "Maiarc Concierge - Who we are",

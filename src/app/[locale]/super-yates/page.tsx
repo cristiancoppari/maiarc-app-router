@@ -3,10 +3,11 @@ import type { Metadata } from "next";
 import Hero from "@/components/hero";
 import TextImage from "@/components/text-image";
 
-import { getPremiumServicePageData } from "@/data/fetchers";
+import Section from "@/components/section";
 import { Locale } from "@/constants/locale";
 import { LinkButton } from "@/components/buttons/buttons";
-import Section from "@/components/section";
+
+import { getPremiumServicePageData } from "@/data/fetchers";
 
 export const metadata: Metadata = {
   title: "Maiarc Concierge",
