@@ -15,14 +15,14 @@ export const metadata: Metadata = {
   description: "Maiarc Concierge",
 };
 
-type RealEstatePageProps = {
+type ExperienciasUnicasPageProps = {
   params: {
     locale: string;
   };
 };
 
-export default async function RealEstatePage({ params: { locale } }: RealEstatePageProps) {
-  const premiumServicePageData = await getPremiumServicePageData(locale as Locale, "real-estate");
+export default async function ExperienciasUnicasPage({ params: { locale } }: ExperienciasUnicasPageProps) {
+  const premiumServicePageData = await getPremiumServicePageData(locale as Locale, "unique-experience");
 
   const { hero, block1, block2 } = premiumServicePageData;
 

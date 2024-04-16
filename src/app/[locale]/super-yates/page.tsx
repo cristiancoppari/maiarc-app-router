@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 
-import ReactMarkdown from "react-markdown";
-
 import Hero from "@/components/hero";
 import TextImage from "@/components/text-image";
 
@@ -15,14 +13,14 @@ export const metadata: Metadata = {
   description: "Maiarc Concierge",
 };
 
-type RealEstatePageProps = {
+type SuperYatesPageProps = {
   params: {
     locale: string;
   };
 };
 
-export default async function RealEstatePage({ params: { locale } }: RealEstatePageProps) {
-  const premiumServicePageData = await getPremiumServicePageData(locale as Locale, "real-estate");
+export default async function SuperYatesPage({ params: { locale } }: SuperYatesPageProps) {
+  const premiumServicePageData = await getPremiumServicePageData(locale as Locale, "super-yatches");
 
   const { hero, block1, block2 } = premiumServicePageData;
 

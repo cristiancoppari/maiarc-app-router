@@ -26,21 +26,22 @@ export default async function QuienesSomosPage({ params: { locale } }: HomePageP
 
   const { images, section1, block1, block2, blockWithBackground } = aboutPageData;
 
-  const content = (
-    <>
-      <h2 className="h2 mb-8">{section1.title}</h2>
-
-      <ReactMarkdown>{section1.text}</ReactMarkdown>
-    </>
-  );
-
   const items = [block1, block2];
 
   return (
     <main>
       <Hero images={images} />
-      <TextImage content={content} image={section1.mainImage} theme={section1.style} direction="left" />
+
+      <TextImage
+        title={section1.title}
+        content={section1.text}
+        image={section1.mainImage}
+        theme={section1.style}
+        direction="left"
+      />
+
       <BigGallery items={items} classNames="section-padding" />
+
       <TextWithBackground
         title={blockWithBackground.title1}
         subtitle={blockWithBackground.title2}
