@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Hero from "@/app/components/hero";
 import Section from "@/app/components/section";
 import ClickableServices from "@/app/components/clickable-services";
+import { CarouselServices } from "@/app/components/carousel";
 
 import { getHomeData } from "@/app/data/fetchers";
 import { Locale } from "@/constants/locale";
@@ -29,6 +30,7 @@ export default async function HomePage({ params: { locale } }: HomePageProps) {
 
       <Section title={servicesBlock.title} text={servicesBlock.text}>
         <ClickableServices services={clickableServices} />
+        <CarouselServices services={servicesBlock.services} />
       </Section>
     </main>
   );
