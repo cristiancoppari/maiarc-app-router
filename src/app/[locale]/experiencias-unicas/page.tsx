@@ -7,7 +7,11 @@ import Section from "@/components/section";
 import TextImage from "@/components/text-image";
 import { LinkButton } from "@/components/buttons/buttons";
 
-import { getPremiumServicePageData } from "@/data/fetchers";
+import FormContextProvider from "@/app/context/form-context";
+
+import { getPremiumServicePageData, getUniqueExperiences } from "@/data/fetchers";
+import { getContactPageTranslations } from "@/lang/translations";
+import { UniqueExperiencesCarousel } from "@/components/carousel";
 
 export const metadata: Metadata = {
   title: "Maiarc Concierge",
@@ -22,6 +26,8 @@ type ExperienciasUnicasPageProps = {
 
 export default async function ExperienciasUnicasPage({ params: { locale } }: ExperienciasUnicasPageProps) {
   const premiumServicePageData = await getPremiumServicePageData(locale as Locale, "unique-experience");
+  const uniqueExperiences = await getUniqueExperiences(locale as Locale);
+  const { form, messages } = await getContactPageTranslations();
 
   const { hero, block1, block2 } = premiumServicePageData;
 
@@ -44,6 +50,17 @@ export default async function ExperienciasUnicasPage({ params: { locale } }: Exp
         theme={block2.style}
         direction={block2.image}
       />
+
+      {/* Need this for translations inside a Client Component in CardSlide */}
+      {/* Refactor later */}
+      <FormContextProvider
+        initialValue={{
+          form,
+          messages,
+        }}
+      >
+        <UniqueExperiencesCarousel uniqueExperiences={uniqueExperiences} />
+      </FormContextProvider>
 
       <Section container noPadding>
         <LinkButton link={"/contacto"} text={locale === "es" ? "Contactanos" : "Contact us"} classes="mt-12" />

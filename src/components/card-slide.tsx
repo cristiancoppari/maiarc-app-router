@@ -1,6 +1,6 @@
 "use client";
 
-import type { Hotel, PremiumVehicle, SuperYatch, Villa, Yatch } from "@/types/services";
+import type { Hotel, PremiumVehicle, SuperYatch, UniqueExperience, Villa, Yatch } from "@/types/services";
 
 import { useState } from "react";
 import { useLocale } from "next-intl";
@@ -18,7 +18,7 @@ import CarouselModal from "./modal-carousel";
 import { Button } from "@/components/ui/button";
 
 type CardSlideProps = {
-  service: Villa | Hotel | Yatch | PremiumVehicle | SuperYatch;
+  service: Villa | Hotel | Yatch | PremiumVehicle | SuperYatch | UniqueExperience;
 };
 
 export default function CardSlide({ service }: CardSlideProps) {
@@ -139,11 +139,12 @@ export default function CardSlide({ service }: CardSlideProps) {
             navigation={true}
             modules={[Pagination, Navigation]}
           >
-            {service.images?.map((image, index) => (
-              <SwiperSlide key={index}>
-                <img src={image} alt="" className="mx-auto h-[500px] object-contain" />
-              </SwiperSlide>
-            ))}
+            {"images" in service &&
+              service.images?.map((image, index) => (
+                <SwiperSlide key={index}>
+                  <img src={image} alt="" className="mx-auto h-[500px] object-contain" />
+                </SwiperSlide>
+              ))}
             <div className="modal-bullets custom-pagination mt-4"></div>
           </Swiper>
         </>

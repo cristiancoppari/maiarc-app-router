@@ -7,7 +7,7 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import CardSlide from "./card-slide";
 import ImageTitle from "@/components/image-title";
 import Section from "@/components/section";
-import { Hotel, PremiumVehicle, SuperYatch, Villa, Yatch } from "@/types/services";
+import { Hotel, PremiumVehicle, SuperYatch, UniqueExperience, Villa, Yatch } from "@/types/services";
 
 type CarouselServicesProps = {
   services: {
@@ -28,6 +28,10 @@ type YatchsResultsCarouselProps = {
 
 type PremiumVehiclesResultsCarouselProps = {
   vehicles: PremiumVehicle[];
+};
+
+type UniqueExperiencesCarouselProps = {
+  uniqueExperiences: UniqueExperience[];
 };
 
 function Carousel({ children }: PropsWithChildren) {
@@ -135,6 +139,20 @@ export function PremiumVehiclesResultsCarousel({ vehicles }: PremiumVehiclesResu
         {vehicles.map((vehicle) => (
           <SwiperSlide key={vehicle.id} className="p-4">
             <CardSlide service={vehicle} />
+          </SwiperSlide>
+        ))}
+      </Carousel>
+    </Section>
+  );
+}
+
+export function UniqueExperiencesCarousel({ uniqueExperiences }: UniqueExperiencesCarouselProps) {
+  return (
+    <Section classes="container" noPadding id="uniqueExperiences">
+      <Carousel>
+        {uniqueExperiences.map((uniqueExperience) => (
+          <SwiperSlide key={uniqueExperience.id} className="p-4">
+            <CardSlide service={uniqueExperience} />
           </SwiperSlide>
         ))}
       </Carousel>

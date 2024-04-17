@@ -64,3 +64,11 @@ export type SuperYatch = {
   cabins: number | null;
   uuid: string;
 };
+
+export type UniqueExperience = {
+  id: number;
+  name: string;
+  mainImage: string;
+  location: string | null;
+  uuid: string;
+};
