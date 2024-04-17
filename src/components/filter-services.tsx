@@ -9,7 +9,7 @@ import { useSearchParams } from "next/navigation";
 import { DESTINATION_NAMES } from "@/constants/destinations";
 
 import Section from "@/components/section";
-import { ClickableServicesSelector } from "@/types/services";
+import { ClickableServicesSelector, Hotel, PremiumVehicle, Villa, Yatch } from "@/types/services";
 import { Link } from "@/lang/navigation";
 import ImageTitle from "@/components/image-title";
 
@@ -26,6 +26,10 @@ type FilterServicesProps = {
   destination: Destinations;
   services: ParsedService[];
   formContent: ContactFormData;
+  villas: Villa[];
+  hotels: Hotel[];
+  yatches: Yatch[];
+  premiumVehicles: PremiumVehicle[];
 };
 
 export default function FilterServices({
@@ -33,7 +37,10 @@ export default function FilterServices({
   sectionText,
   destination,
   services,
-  formContent,
+  villas,
+  hotels,
+  yatches,
+  premiumVehicles,
 }: FilterServicesProps) {
   const searchParams = useSearchParams();
 

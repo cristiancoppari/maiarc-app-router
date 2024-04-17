@@ -12,7 +12,7 @@ import FormContextProvider from "@/app/context/form-context";
 import Hero from "@/components/hero";
 import FilterServices from "@/components/filter-services";
 
-import { getContactPageData, getDestinoPageData } from "@/data/fetchers";
+import { getDestinoPageData, getVillas, getHotels, getYatches, getPremiumVehicles } from "@/data/fetchers";
 import { getContactPageTranslations } from "@/lang/translations";
 
 export const metadata: Metadata = {
@@ -37,8 +37,12 @@ export default async function DestinosPage({ params: { locale, destino } }: Expe
   setRequestLocale(locale);
 
   const destinoPageData = await getDestinoPageData(locale as Locale);
-  const contactPageData = await getContactPageData(locale as Locale);
   const { form, messages } = await getContactPageTranslations();
+
+  const villas = await getVillas();
+  const hotels = await getHotels();
+  const yatches = await getYatches();
+  const premiumVehicles = await getPremiumVehicles();
 
   const { title, texts, heroImages, services } = destinoPageData;
 
@@ -86,6 +90,10 @@ export default async function DestinosPage({ params: { locale, destino } }: Expe
           destination={destino}
           services={parsedServices}
           formContent={formContent}
+          villas={villas}
+          hotels={hotels}
+          yatches={yatches}
+          premiumVehicles={premiumVehicles}
         />
       </FormContextProvider>
     </main>

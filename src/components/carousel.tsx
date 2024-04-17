@@ -6,6 +6,28 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import ImageTitle from "@/components/image-title";
 import Section from "@/components/section";
+import { Hotel, PremiumVehicle, Villa, Yatch } from "@/types/services";
+
+type CarouselServicesProps = {
+  services: {
+    id: number;
+    name: string;
+    mainImage: string;
+  }[];
+};
+
+type LuxuryAccommodationsResultsCarouselProps = {
+  villas: Villa[];
+  hotels: Hotel[];
+};
+
+type YatchsResultsCarouselProps = {
+  yatchs: Yatch[];
+};
+
+type PremiumVehiclesResultsCarouselProps = {
+  vehicles: PremiumVehicle[];
+};
 
 function Carousel({ children }: PropsWithChildren) {
   return (
@@ -39,14 +61,6 @@ function Carousel({ children }: PropsWithChildren) {
   );
 }
 
-type CarouselServicesProps = {
-  services: {
-    id: number;
-    name: string;
-    mainImage: string;
-  }[];
-};
-
 export function CarouselServices({ services }: CarouselServicesProps) {
   return (
     <Carousel>
@@ -75,7 +89,7 @@ export function AccommodationsCarousel({ services }: CarouselServicesProps) {
   );
 }
 
-export function LuxuryAccommodationsResultsCarousel({ villas, hotels }) {
+export function LuxuryAccommodationsResultsCarousel({ villas, hotels }: LuxuryAccommodationsResultsCarouselProps) {
   return (
     <Section classes="container" noPadding id="luxuryAccommodations">
       <Carousel>
@@ -98,7 +112,7 @@ export function LuxuryAccommodationsResultsCarousel({ villas, hotels }) {
   );
 }
 
-export function YatchsResultsCarousel(yatchs) {
+export function YatchsResultsCarousel({ yatchs }: YatchsResultsCarouselProps) {
   return (
     <Section classes="container" noPadding id="yatchs">
       {/* Yatch Carousel */}
@@ -113,7 +127,7 @@ export function YatchsResultsCarousel(yatchs) {
   );
 }
 
-export function PremiumVehiclesResultsCarousel({ vehicles }) {
+export function PremiumVehiclesResultsCarousel({ vehicles }: PremiumVehiclesResultsCarouselProps) {
   return (
     <Section classes="container" noPadding id="premiumVehicles">
       {/* Premium Vehicles Carousel */}

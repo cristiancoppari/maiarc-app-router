@@ -7,7 +7,11 @@ import type { Root as ApiResponseDestinoPage } from "@/types/api/api-destino-pag
 import type { Root as ApiResponseDestinosPage } from "@/types/api/api-destinos-page-data";
 import type { Root as ApiResponseContactPage } from "@/types/api/api-contact-page-data";
 
+import type { Root as ApiResponseVilla } from "@/types/api/api-villas-data";
+import type { Root as ApiResponseHotels } from "@/types/api/api-hotels-data";
+import type { Root as ApiResponseYatches } from "@/types/api/api-yatches-data";
 import type { Root as ApiResponseDestinations } from "@/types/api/api-destinations-data";
+import type { Root as ApiResponsePremiumVehicles } from "@/types/api/api-premium-vehicles-data";
 
 const FALLBACK_IMAGE = "/images/default.jpeg";
 
@@ -272,6 +276,136 @@ export async function getDestinations() {
     });
 
     return destinations;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Hubo un error");
+  }
+}
+
+export async function getHotels() {
+  try {
+    const res = await fetch(
+      `${process.env.API_URL}/hotels/?fields=name&fields=includes_breakfast&fields=stars&fields=capacity&fields=location&populate[main_image][fields]=url&populate[images][fields]=url&populate[destination][fields]=name?locale=all&fields=uuid`,
+    );
+
+    if (!res.ok) throw new Error("Failed to fetch hotels");
+
+    const data: ApiResponseHotels = await res.json();
+
+    const hotels = data.data.map((element) => {
+      return {
+        id: element.id,
+        name: element.attributes.name,
+        mainImage: element.attributes.main_image.data.attributes.url || FALLBACK_IMAGE,
+        images: element.attributes.images.data.map((image) => {
+          return image.attributes.url || FALLBACK_IMAGE;
+        }),
+        destination: element.attributes.destination.data.attributes.name,
+        capacity: element.attributes.capacity,
+        stars: element.attributes.stars,
+        location: element.attributes.location,
+        uuid: element.attributes.uuid,
+      };
+    });
+
+    return hotels;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Hubo un error");
+  }
+}
+
+export async function getVillas() {
+  try {
+    const res = await fetch(
+      `${process.env.API_URL}/villas/?fields=name&fields=locale&fields=capacity&fields=rooms&fields=includes_breakfast&populate[main_image][fields]=url&populate[images][fields]=url&fields=location&populate[destination][fields]=name&fields=uuid`,
+    );
+
+    if (!res.ok) throw new Error("Failed to fetch villas");
+
+    const data: ApiResponseVilla = await res.json();
+
+    const villas = data.data.map((element) => {
+      return {
+        id: element.id,
+        name: element.attributes.name,
+        location: element.attributes.location,
+        destination: element.attributes.destination.data.attributes.name,
+        mainImage: element.attributes.main_image.data.attributes.url || FALLBACK_IMAGE,
+        images: element.attributes.images.data.map((image) => {
+          return image.attributes.url || FALLBACK_IMAGE;
+        }),
+        rooms: element.attributes.rooms,
+        capacity: element.attributes.capacity,
+        includesBreakfast: element.attributes.includes_breakfast,
+        uuid: element.attributes.uuid,
+      };
+    });
+
+    return villas;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Hubo un error");
+  }
+}
+
+export async function getYatches() {
+  try {
+    const res = await fetch(
+      `${process.env.API_URL}/yatches/?fields[0]=name&fields=location&populate[main_image][fields]=url&populate[images][fields]=url&populate[destination][fields]=name&fields=capacity&fields=uuid`,
+    );
+
+    const data: ApiResponseYatches = await res.json();
+
+    const yatchs = data.data.map((element) => {
+      return {
+        id: element.id,
+        name: element.attributes.name,
+        mainImage: element.attributes.main_image.data.attributes.url || FALLBACK_IMAGE,
+        images: element.attributes.images.data.map((image) => {
+          return image.attributes.url || FALLBACK_IMAGE;
+        }),
+        destination: element.attributes.destination.data.attributes.name,
+        location: element.attributes.location || null,
+        capacity: element.attributes.capacity,
+        uuid: element.attributes.uuid,
+      };
+    });
+
+    return yatchs;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Hubo un error");
+  }
+}
+
+export async function getPremiumVehicles() {
+  try {
+    const res = await fetch(
+      `${process.env.API_URL}/premium-vehicles/?fields=name&fields=type&fields=capacity&fields=transmission&fields=type&populate[main_image][fields]=url&populate[images][fields]=url&populate[destination][fields]=name&fields=uuid`,
+    );
+
+    if (!res.ok) throw new Error("Failed to fetch premium vehicles");
+
+    const data: ApiResponsePremiumVehicles = await res.json();
+
+    const vehicles = data.data.map((element) => {
+      return {
+        id: element.id,
+        name: element.attributes.name,
+        mainImage: element.attributes.main_image.data.attributes.url || FALLBACK_IMAGE,
+        images: element.attributes.images.data.map((image) => {
+          return image.attributes.url || FALLBACK_IMAGE;
+        }),
+        destination: element.attributes.destination.data.attributes.name,
+        capacity: element.attributes.capacity,
+        type: element.attributes.type,
+        transmission: element.attributes.transmission,
+        uuid: element.attributes.uuid,
+      };
+    });
+
+    return vehicles;
   } catch (error) {
     console.error(error);
     throw new Error("Hubo un error");
