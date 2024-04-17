@@ -19,7 +19,7 @@ type CarouselServicesProps = {
 
 type LuxuryAccommodationsResultsCarouselProps = {
   villas: Villa[];
-  hotels: Hotel[];
+  hotels?: Hotel[];
 };
 
 type YatchsResultsCarouselProps = {
@@ -101,13 +101,15 @@ export function LuxuryAccommodationsResultsCarousel({ villas, hotels }: LuxuryAc
         ))}
       </Carousel>
 
-      <Carousel>
-        {hotels.map((hotel) => (
-          <SwiperSlide key={hotel.id} className="p-4">
-            <CardSlide service={hotel} />
-          </SwiperSlide>
-        ))}
-      </Carousel>
+      {!!hotels && (
+        <Carousel>
+          {hotels.map((hotel) => (
+            <SwiperSlide key={hotel.id} className="p-4">
+              <CardSlide service={hotel} />
+            </SwiperSlide>
+          ))}
+        </Carousel>
+      )}
     </Section>
   );
 }

@@ -8,13 +8,20 @@ interface BigGalleryProps {
   items: Service[];
   cta?: string;
   classNames?: string;
+  size?: "small" | "big";
 }
 
-export default function BigGallery({ items, cta, classNames }: BigGalleryProps) {
+export default function BigGallery({ items, cta, classNames, size = "small" }: BigGalleryProps) {
   const [item1, item2] = items;
 
   return (
-    <div className={cn("md:w-6/7 sm:w-7/8 mx-auto grid grid-cols-1 gap-4 md:grid-cols-2 lg:w-11/12", classNames || "")}>
+    <div
+      className={cn(
+        size === "big" && "md:w-6/7 sm:w-7/8 mx-auto grid grid-cols-1 gap-4 md:grid-cols-2 lg:w-11/12",
+        size === "small" && "section-padding container grid grid-cols-1 gap-4 md:grid-cols-2",
+        classNames || "",
+      )}
+    >
       <BigImage
         image={item1.mainImage}
         title={item1.name}

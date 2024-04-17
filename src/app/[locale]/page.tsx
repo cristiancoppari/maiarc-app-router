@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
 
 import { unstable_setRequestLocale as setRequestLocale } from "next-intl/server";
-import { notFound } from "next/navigation";
+
+import FormContextProvider from "@/app/context/form-context";
 
 import Hero from "@/components/hero";
 import Section from "@/components/section";
 import ClickableServices from "@/components/clickable-services";
-import { CarouselServices } from "@/components/carousel";
+import { CarouselServices, LuxuryAccommodationsResultsCarousel } from "@/components/carousel";
 import { LinkButton } from "@/components/buttons/buttons";
 import BigGallery from "@/components/big-gallery";
 import Newsletter from "@/components/newsletter";
 
-import { getCtasData } from "@/lang/translations";
-import { getHomeData } from "@/data/fetchers";
+import { getContactPageTranslations, getCtasData } from "@/lang/translations";
+import { getHomeData, getVillas } from "@/data/fetchers";
 import { Locale } from "@/constants/locale";
 
 export const metadata: Metadata = {
@@ -30,6 +31,9 @@ export default async function HomePage({ params: { locale } }: HomePageProps) {
   setRequestLocale(locale);
 
   const homeData = await getHomeData(locale as Locale);
+  const villas = await getVillas();
+  const { form, messages } = await getContactPageTranslations();
+
   const { more, subscription } = await getCtasData();
 
   const {
@@ -50,12 +54,21 @@ export default async function HomePage({ params: { locale } }: HomePageProps) {
         <ClickableServices services={clickableServices} />
         <CarouselServices services={servicesBlock.services} />
         <LinkButton link="/contacto" text={more} classes="my-16" />
-        <BigGallery items={premiumServicesBlock.services} cta={more} />
+        <BigGallery items={premiumServicesBlock.services} cta={more} size="big" />
       </Section>
 
-      <Section title={accommodationsBlock.title} text={accommodationsBlock.text} classes="bg-zinc-200">
-        {/* Accommodations */}
-      </Section>
+      {/* Need this for translations inside a Client Component in CardSlide */}
+      {/* Refactor later */}
+      <FormContextProvider
+        initialValue={{
+          form,
+          messages,
+        }}
+      >
+        <Section title={accommodationsBlock.title} text={accommodationsBlock.text} classes="bg-zinc-200">
+          <LuxuryAccommodationsResultsCarousel villas={villas} />
+        </Section>
+      </FormContextProvider>
 
       <Section title={communityBlock.title} text={communityBlock.text} container>
         {/* Community */}
