@@ -9,6 +9,11 @@ import { useSearchParams } from "next/navigation";
 import { DESTINATION_NAMES } from "@/constants/destinations";
 
 import Section from "@/components/section";
+import {
+  LuxuryAccommodationsResultsCarousel,
+  YatchsResultsCarousel,
+  PremiumVehiclesResultsCarousel,
+} from "@/components/carousel";
 import { ClickableServicesSelector, Hotel, PremiumVehicle, Villa, Yatch } from "@/types/services";
 import { Link } from "@/lang/navigation";
 import ImageTitle from "@/components/image-title";
@@ -65,6 +70,12 @@ export default function FilterServices({
         services={services}
         selectSectionHandler={selectSectionHandler}
       />
+
+      {activeSection === "luxuryAccommodations" && (
+        <LuxuryAccommodationsResultsCarousel villas={villas} hotels={hotels} />
+      )}
+      {activeSection === "yatchs" && <YatchsResultsCarousel yatchs={yatches} />}
+      {activeSection === "premiumVehicles" && <PremiumVehiclesResultsCarousel vehicles={premiumVehicles} />}
     </Section>
   );
 }

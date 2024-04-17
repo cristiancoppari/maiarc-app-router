@@ -1,15 +1,23 @@
+import type { ContactFormData } from "@/types/forms";
+
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
-import ReservationForm from "./reservation-form";
+import ReservationForm from "@/components/reservation-form";
 
 type ConsultationModalProps = {
   isOpen: boolean;
   closeModal: () => void;
+  data: ContactFormData;
+  item: {
+    name: string;
+    location: string | undefined | null;
+    destination: string | undefined;
+  };
 };
 
-export default function ConsultationModal({ isOpen, closeModal, item }: ConsultationModalProps) {
+export default function ConsultationModal({ isOpen, closeModal, item, data }: ConsultationModalProps) {
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -69,15 +77,11 @@ export default function ConsultationModal({ isOpen, closeModal, item }: Consulta
                   )}
                 </div>
 
-                {/* Reservation Form */}
-                {"location" in item ? (
-                  <ReservationForm
-                    name={item.name}
-                    destination={!!item.location ? `${item.location as string} ${item.destination}` : ""}
-                  />
-                ) : (
-                  <ReservationForm name={item.name} destination={item.destination} />
-                )}
+                <ReservationForm
+                  name={item.name}
+                  destination={!!item.location ? `${item.location} ${item.destination}` : ""}
+                  data={data}
+                />
               </Dialog.Panel>
             </Transition.Child>
           </div>

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { Destinations } from "@/types/destinations";
 import type { Locale } from "@/constants/locale";
 
-import { DESTINATION_KEYS } from "@/constants/destinations";
+import { DESTINATION_NAMES, DESTINATION_KEYS } from "@/constants/destinations";
 
 import { notFound } from "next/navigation";
 import { unstable_setRequestLocale as setRequestLocale } from "next-intl/server";
@@ -19,6 +19,8 @@ export const metadata: Metadata = {
   title: "Maiarc Concierge - Destination",
   description: "Maiarc Concierge - Destination",
 };
+
+export const dynamic = "force-dynamic";
 
 type ExperienciasUnicasPageProps = {
   params: {
@@ -43,6 +45,15 @@ export default async function DestinosPage({ params: { locale, destino } }: Expe
   const hotels = await getHotels();
   const yatches = await getYatches();
   const premiumVehicles = await getPremiumVehicles();
+
+  console.log(villas, hotels, yatches, premiumVehicles);
+
+  const villasFiltered = villas.filter((element) => element.destination === DESTINATION_NAMES[destino]);
+  const yatchesFiltered = yatches.filter((element) => element.destination === DESTINATION_NAMES[destino]);
+  const hotelsFiltered = hotels.filter((element) => element.destination === DESTINATION_NAMES[destino]);
+  const premiumVehiclesFiltered = premiumVehicles.filter(
+    (element) => element.destination === DESTINATION_NAMES[destino],
+  );
 
   const { title, texts, heroImages, services } = destinoPageData;
 
@@ -90,10 +101,10 @@ export default async function DestinosPage({ params: { locale, destino } }: Expe
           destination={destino}
           services={parsedServices}
           formContent={formContent}
-          villas={villas}
-          hotels={hotels}
-          yatches={yatches}
-          premiumVehicles={premiumVehicles}
+          villas={villasFiltered}
+          hotels={hotelsFiltered}
+          yatches={yatchesFiltered}
+          premiumVehicles={premiumVehiclesFiltered}
         />
       </FormContextProvider>
     </main>

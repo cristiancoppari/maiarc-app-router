@@ -4,6 +4,7 @@ import type { PropsWithChildren } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import CardSlide from "./card-slide";
 import ImageTitle from "@/components/image-title";
 import Section from "@/components/section";
 import { Hotel, PremiumVehicle, Villa, Yatch } from "@/types/services";
@@ -100,7 +101,6 @@ export function LuxuryAccommodationsResultsCarousel({ villas, hotels }: LuxuryAc
         ))}
       </Carousel>
 
-      {/* Hotels Carousel */}
       <Carousel>
         {hotels.map((hotel) => (
           <SwiperSlide key={hotel.id} className="p-4">
@@ -115,7 +115,6 @@ export function LuxuryAccommodationsResultsCarousel({ villas, hotels }: LuxuryAc
 export function YatchsResultsCarousel({ yatchs }: YatchsResultsCarouselProps) {
   return (
     <Section classes="container" noPadding id="yatchs">
-      {/* Yatch Carousel */}
       <Carousel>
         {yatchs.map((yatch) => (
           <SwiperSlide key={yatch.id} className="p-4">
@@ -130,7 +129,6 @@ export function YatchsResultsCarousel({ yatchs }: YatchsResultsCarouselProps) {
 export function PremiumVehiclesResultsCarousel({ vehicles }: PremiumVehiclesResultsCarouselProps) {
   return (
     <Section classes="container" noPadding id="premiumVehicles">
-      {/* Premium Vehicles Carousel */}
       <Carousel>
         {vehicles.map((vehicle) => (
           <SwiperSlide key={vehicle.id} className="p-4">

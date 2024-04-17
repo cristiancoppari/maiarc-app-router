@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Button as Btn } from "@/components/buttons/buttons";
 import DatePicker from "@/components/date-picker";
 import { Textarea } from "@/components/ui/textarea";
+import { ContactFormData } from "@/types/forms";
 
 const formSchema = z.object({
   name: z
@@ -71,6 +72,7 @@ const formSchema = z.object({
 type ReservationFormProps = {
   name: string;
   destination: string;
+  data: ContactFormData;
 };
 
 export default function ReservationForm({ name, destination, data }: ReservationFormProps) {
@@ -97,9 +99,9 @@ export default function ReservationForm({ name, destination, data }: Reservation
         body: JSON.stringify(values),
       }),
       {
-        loading: c.messages.sending,
-        success: c.messages.success,
-        error: c.messages.error,
+        loading: data.messages.sending,
+        success: data.messages.success,
+        error: data.messages.error,
       },
     );
   }
@@ -135,9 +137,9 @@ export default function ReservationForm({ name, destination, data }: Reservation
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{c.form.name.label}</FormLabel>
+              <FormLabel>{data.form.name.label}</FormLabel>
               <FormControl>
-                <Input placeholder={c.form.name.placeholder} {...field} />
+                <Input placeholder={data.form.name.placeholder} {...field} />
               </FormControl>
               {/* <FormMessage /> */}
             </FormItem>
@@ -148,9 +150,9 @@ export default function ReservationForm({ name, destination, data }: Reservation
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{c.form.email.label}</FormLabel>
+              <FormLabel>{data.form.email.label}</FormLabel>
               <FormControl>
-                <Input placeholder={c.form.name.placeholder} {...field} />
+                <Input placeholder={data.form.name.placeholder} {...field} />
               </FormControl>
               {/* <FormMessage /> */}
             </FormItem>
@@ -162,9 +164,9 @@ export default function ReservationForm({ name, destination, data }: Reservation
             name="prefix"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>{c.form.prefix.label}</FormLabel>
+                <FormLabel>{data.form.prefix.label}</FormLabel>
                 <FormControl>
-                  <Input placeholder={c.form.prefix.label} {...field} />
+                  <Input placeholder={data.form.prefix.label} {...field} />
                 </FormControl>
                 {/* <FormMessage /> */}
               </FormItem>
@@ -176,9 +178,9 @@ export default function ReservationForm({ name, destination, data }: Reservation
             name="phone"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>{c.form.phone.label}</FormLabel>
+                <FormLabel>{data.form.phone.label}</FormLabel>
                 <FormControl>
-                  <Input placeholder={c.form.phone.label} {...field} />
+                  <Input placeholder={data.form.phone.label} {...field} />
                 </FormControl>
                 {/* <FormMessage /> */}
               </FormItem>
@@ -192,7 +194,7 @@ export default function ReservationForm({ name, destination, data }: Reservation
             name="date_start"
             render={({ field }) => (
               <FormItem className="flex w-full flex-col">
-                <FormLabel>{c.form.date_start.label}</FormLabel>
+                <FormLabel>{data.form.dateStart.label}</FormLabel>
                 <FormControl>
                   <DatePicker field={field} />
                 </FormControl>
@@ -205,7 +207,7 @@ export default function ReservationForm({ name, destination, data }: Reservation
             name="date_end"
             render={({ field }) => (
               <FormItem className="flex w-full flex-col">
-                <FormLabel>{c.form.date_end.label}</FormLabel>
+                <FormLabel>{data.form.dateEnd.label}</FormLabel>
                 <FormControl>
                   <DatePicker field={field} />
                 </FormControl>
@@ -220,16 +222,16 @@ export default function ReservationForm({ name, destination, data }: Reservation
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{c.form.message.label}</FormLabel>
+              <FormLabel>{data.form.message.label}</FormLabel>
               <FormControl>
-                <Textarea placeholder={c.form.name.placeholder} {...field} />
+                <Textarea placeholder={data.form.name.placeholder} {...field} />
               </FormControl>
               {/* <FormMessage /> */}
             </FormItem>
           )}
         />
 
-        <Btn type="submit" text={c.form.submit} classes="block mx-auto" />
+        <Btn type="submit" text={data.form.submit} classes="block mx-auto" />
       </form>
     </Form>
   );

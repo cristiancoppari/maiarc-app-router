@@ -1,8 +1,8 @@
 export const DESTINATION_NAMES = {
-  ibiza: "Ibiza",
-  tulum: "Tulum",
-  "punta-del-este": "Punta del Este",
-  miami: "Miami",
+  ibiza: "ibiza",
+  tulum: "tulum",
+  "punta-del-este": "punta del Este",
+  miami: "miami",
 } as const;
 
 export const DESTINATION_KEYS = Object.keys(DESTINATION_NAMES);
