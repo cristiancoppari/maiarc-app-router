@@ -46,8 +46,6 @@ export default async function DestinosPage({ params: { locale, destino } }: Expe
   const yatches = await getYatches();
   const premiumVehicles = await getPremiumVehicles();
 
-  console.log(villas, hotels, yatches, premiumVehicles);
-
   const villasFiltered = villas.filter((element) => element.destination === DESTINATION_NAMES[destino]);
   const yatchesFiltered = yatches.filter((element) => element.destination === DESTINATION_NAMES[destino]);
   const hotelsFiltered = hotels.filter((element) => element.destination === DESTINATION_NAMES[destino]);
