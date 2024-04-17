@@ -7,7 +7,7 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import CardSlide from "./card-slide";
 import ImageTitle from "@/components/image-title";
 import Section from "@/components/section";
-import { Hotel, PremiumVehicle, Villa, Yatch } from "@/types/services";
+import { Hotel, PremiumVehicle, SuperYatch, Villa, Yatch } from "@/types/services";
 
 type CarouselServicesProps = {
   services: {
@@ -23,7 +23,7 @@ type LuxuryAccommodationsResultsCarouselProps = {
 };
 
 type YatchsResultsCarouselProps = {
-  yatchs: Yatch[];
+  yatchs: Yatch[] | SuperYatch[];
 };
 
 type PremiumVehiclesResultsCarouselProps = {

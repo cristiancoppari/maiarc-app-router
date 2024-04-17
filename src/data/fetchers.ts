@@ -1,5 +1,6 @@
 import type { Locale } from "@/constants/locale";
 
+// pages
 import type { Root as ApiResponseHomePage } from "@/types/api/api-home-data";
 import type { Root as ApiResponseAboutUsPage } from "@/types/api/api-about-us-data";
 import type { Root as ApiResponsePremiumServicePage } from "@/types/api/api-premium-service-data";
@@ -7,11 +8,17 @@ import type { Root as ApiResponseDestinoPage } from "@/types/api/api-destino-pag
 import type { Root as ApiResponseDestinosPage } from "@/types/api/api-destinos-page-data";
 import type { Root as ApiResponseContactPage } from "@/types/api/api-contact-page-data";
 
+// services
 import type { Root as ApiResponseVilla } from "@/types/api/api-villas-data";
 import type { Root as ApiResponseHotels } from "@/types/api/api-hotels-data";
 import type { Root as ApiResponseYatches } from "@/types/api/api-yatches-data";
 import type { Root as ApiResponseDestinations } from "@/types/api/api-destinations-data";
 import type { Root as ApiResponsePremiumVehicles } from "@/types/api/api-premium-vehicles-data";
+
+// premium services
+import type { Root as ApiResponseUniqueExperience } from "@/types/api/api-unique-experiences-data";
+import type { Root as ApiResponseSuperYatches } from "@/types/api/api-super-yatches-data";
+// import type { Root as ApiResponseRealEstates } from "@/types/api/api-real-estates-data";
 
 const FALLBACK_IMAGE = "/images/default.jpeg";
 
@@ -411,3 +418,96 @@ export async function getPremiumVehicles() {
     throw new Error("Hubo un error");
   }
 }
+
+// premium services
+export async function getUniqueExperiences(locale: Locale) {
+  try {
+    const res = await fetch(
+      `${process.env.API_URL}/unique-experiences/?fields=name&fields=location&populate[main_image][fields]=url&populate[images][fields]=url&fields=description&fields=uuid&locale=${locale}`,
+    );
+
+    if (!res.ok) throw new Error("Failed to fetch unique experiences");
+
+    const data: ApiResponseUniqueExperience = await res.json();
+
+    const unique_experiences = data.data.map((element) => {
+      return {
+        id: element.id,
+        name: element.attributes.name,
+        mainImage: element.attributes.main_image.data.attributes.url || FALLBACK_IMAGE,
+        // images: element.attributes.images.data.map((image) => {
+        //   return image;
+        // }),
+        location: element.attributes.location || null,
+        uuid: element.attributes.uuid,
+      };
+    });
+
+    return unique_experiences;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Hubo un error");
+  }
+}
+
+export async function getSuperYatches() {
+  try {
+    const res = await fetch(
+      `${process.env.API_URL}/super-yatches/?fields=name&fields=location&populate[main_image][fields]=url&populate[images][fields]=url&populate[destination][fields]=name&fields=capacity&fields=uuid&fields=cabins`,
+    );
+
+    const data: ApiResponseSuperYatches = await res.json();
+
+    const superYatchesData = data.data.map((element) => {
+      return {
+        id: element.id,
+        name: element.attributes.name,
+        mainImage: element.attributes.main_image.data.attributes.url || FALLBACK_IMAGE,
+        images: element.attributes.images.data.map((image) => {
+          return image.attributes.url || FALLBACK_IMAGE;
+        }),
+        location: element.attributes.location,
+        capacity: element.attributes.capacity || null,
+        cabins: element.attributes.cabins || null,
+        uuid: element.attributes.uuid,
+      };
+    });
+
+    return superYatchesData;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Hubo un error");
+  }
+}
+
+// export async function getRealEstates() {
+//   try {
+//     const res = await fetch(
+//       `${process.env.API_URL}/real-estates/?fields=name&fields=location&populate[main_image][fields]=url&populate[images][fields]=url&fields=bathrooms&fields=uuid`,
+//     );
+
+//     if (!res.ok) throw new Error("Failed to fetch real estates");
+
+//     const data: ApiResponseRealEstates = await res.json();
+
+//     const realEstateData = data.data.map((element) => {
+//       return {
+//         id: element.id,
+//         name: element.attributes.name,
+//         mainImage: element.attributes.main_image.data.attributes.url || FALLBACK_IMAGE,
+//         images: element.attributes.images.data.map((image) => {
+//           return image.attributes.url;
+//         }),
+//         location: element.attributes.location ?? null,
+//         bathrooms: element.attributes.bathrooms ?? null,
+//         uuid: element.attributes.uuid,
+//         destination: "",
+//       };
+//     });
+
+//     return realEstateData;
+//   } catch (error) {
+//     console.error(error);
+//     throw new Error("Hubo un error");
+//   }
+// }

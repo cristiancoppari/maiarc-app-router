@@ -53,3 +53,14 @@ export type PremiumVehicle = {
   transmission: string;
   uuid: string;
 };
+
+export type SuperYatch = {
+  id: number;
+  name: string;
+  mainImage: string;
+  images: string[];
+  location: string;
+  capacity: number | null;
+  cabins: number | null;
+  uuid: string;
+};

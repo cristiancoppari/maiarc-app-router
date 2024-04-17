@@ -1,6 +1,6 @@
 "use client";
 
-import type { Hotel, PremiumVehicle, Villa, Yatch } from "@/types/services";
+import type { Hotel, PremiumVehicle, SuperYatch, Villa, Yatch } from "@/types/services";
 
 import { useState } from "react";
 import { useLocale } from "next-intl";
@@ -18,7 +18,7 @@ import CarouselModal from "./modal-carousel";
 import { Button } from "@/components/ui/button";
 
 type CardSlideProps = {
-  service: Villa | Hotel | Yatch | PremiumVehicle;
+  service: Villa | Hotel | Yatch | PremiumVehicle | SuperYatch;
 };
 
 export default function CardSlide({ service }: CardSlideProps) {
@@ -36,7 +36,7 @@ export default function CardSlide({ service }: CardSlideProps) {
   const modalData = {
     name: service.name,
     location: "location" in service ? service.location : "",
-    destination: service.destination,
+    destination: "destination" in service ? service.destination : "",
   };
 
   return (
@@ -72,7 +72,7 @@ export default function CardSlide({ service }: CardSlideProps) {
                 </div>
               )}
 
-              {"location" in service && (
+              {"location" in service && !("destination" in service) && (
                 <div className="flex items-center gap-2">
                   <IoLocationOutline className="h-6 w-6" />
                   <p className="text-sm capitalize">{service.location}</p>

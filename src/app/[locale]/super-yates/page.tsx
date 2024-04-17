@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 
+import { Locale } from "@/constants/locale";
+
 import Hero from "@/components/hero";
 import TextImage from "@/components/text-image";
-
 import Section from "@/components/section";
-import { Locale } from "@/constants/locale";
 import { LinkButton } from "@/components/buttons/buttons";
+import { YatchsResultsCarousel } from "@/components/carousel";
 
-import { getPremiumServicePageData } from "@/data/fetchers";
+import { getPremiumServicePageData, getSuperYatches } from "@/data/fetchers";
+import { getContactPageTranslations } from "@/lang/translations";
+import FormContextProvider from "@/app/context/form-context";
 
 export const metadata: Metadata = {
   title: "Maiarc Concierge",
@@ -22,6 +25,8 @@ type SuperYatesPageProps = {
 
 export default async function SuperYatesPage({ params: { locale } }: SuperYatesPageProps) {
   const premiumServicePageData = await getPremiumServicePageData(locale as Locale, "super-yatches");
+  const yatchs = await getSuperYatches();
+  const { form, messages } = await getContactPageTranslations();
 
   const { hero, block1, block2 } = premiumServicePageData;
 
@@ -44,6 +49,17 @@ export default async function SuperYatesPage({ params: { locale } }: SuperYatesP
         theme={block2.style}
         direction={block2.image}
       />
+
+      {/* Need this for translations inside a Client Component in CardSlide */}
+      {/* Refactor later */}
+      <FormContextProvider
+        initialValue={{
+          form,
+          messages,
+        }}
+      >
+        <YatchsResultsCarousel yatchs={yatchs} />
+      </FormContextProvider>
 
       <Section container noPadding>
         <LinkButton link={"/contacto"} text={locale === "es" ? "Contactanos" : "Contact us"} classes="mt-12" />
