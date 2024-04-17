@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { unstable_setRequestLocale as setRequestLocale } from "next-intl/server";
+// import { unstable_setRequestLocale as setRequestLocale } from "next-intl/server";
 
 import FormContextProvider from "@/app/context/form-context";
 
@@ -28,7 +28,7 @@ type HomePageProps = {
 };
 
 export default async function HomePage({ params: { locale } }: HomePageProps) {
-  setRequestLocale(locale);
+  // setRequestLocale(locale);
 
   const homeData = await getHomeData(locale as Locale);
   const villas = await getVillas();

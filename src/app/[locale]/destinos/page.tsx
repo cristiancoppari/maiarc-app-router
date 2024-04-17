@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { Locale } from "@/constants/locale";
 
-import { unstable_setRequestLocale as setRequestLocale } from "next-intl/server";
+// import { unstable_setRequestLocale as setRequestLocale } from "next-intl/server";
 
 import Section from "@/components/section";
 import DestinosGrid from "@/components/destinos-grid";
@@ -22,7 +22,7 @@ type ExperienciasUnicasPageProps = {
 };
 
 export default async function DestinosPage({ params: { locale } }: ExperienciasUnicasPageProps) {
-  setRequestLocale(locale);
+  // setRequestLocale(locale);
 
   const premiumServicePageData = await getDestinosPageData(locale as Locale);
   const destinations = await getDestinations();

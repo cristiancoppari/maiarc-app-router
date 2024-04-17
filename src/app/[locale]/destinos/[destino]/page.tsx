@@ -5,7 +5,7 @@ import type { Locale } from "@/constants/locale";
 import { DESTINATION_NAMES, DESTINATION_KEYS } from "@/constants/destinations";
 
 import { notFound } from "next/navigation";
-import { unstable_setRequestLocale as setRequestLocale } from "next-intl/server";
+// import { unstable_setRequestLocale as setRequestLocale } from "next-intl/server";
 
 import FormContextProvider from "@/app/context/form-context";
 
@@ -32,7 +32,7 @@ type ExperienciasUnicasPageProps = {
 export default async function DestinosPage({ params: { locale, destino } }: ExperienciasUnicasPageProps) {
   if (!DESTINATION_KEYS.includes(destino)) notFound();
 
-  setRequestLocale(locale);
+  // setRequestLocale(locale);
 
   const destinoPageData = await getDestinoPageData(locale as Locale);
   const { form, messages } = await getContactPageTranslations();
