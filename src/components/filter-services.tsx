@@ -1,12 +1,14 @@
 "use client";
 
+import type { ContactFormData } from "@/types/forms";
+import type { Destinations } from "@/types/destinations";
+
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import { DESTINATION_NAMES } from "@/constants/destinations";
 
 import Section from "@/components/section";
-import { Destinations } from "@/types/destinations";
 import { ClickableServicesSelector } from "@/types/services";
 import { Link } from "@/lang/navigation";
 import ImageTitle from "@/components/image-title";
@@ -23,29 +25,35 @@ type FilterServicesProps = {
   sectionText: string;
   destination: Destinations;
   services: ParsedService[];
+  formContent: ContactFormData;
 };
 
-export default function FilterServices({ sectionTitle, sectionText, destination, services }: FilterServicesProps) {
+export default function FilterServices({
+  sectionTitle,
+  sectionText,
+  destination,
+  services,
+  formContent,
+}: FilterServicesProps) {
   const searchParams = useSearchParams();
 
   const serviceSelector = searchParams.get("serviceSelector");
   const serviceNameSearchParam = searchParams.get("serviceName");
   const hideCardsSearchParam = searchParams.get("hideCards");
   const sectionClasses = `${hideCardsSearchParam ? "!pb-0" : ""}`;
+  const title = hideCardsSearchParam
+    ? `${serviceNameSearchParam} ${DESTINATION_NAMES[destination]}`
+    : `${sectionTitle} ${DESTINATION_NAMES[destination]}`;
 
   const [activeSection, setActiveSection] = useState<ClickableServicesSelector>(
     serviceSelector as ClickableServicesSelector,
   );
 
-  const title = hideCardsSearchParam
-    ? `${serviceNameSearchParam} ${DESTINATION_NAMES[destination]}`
-    : `${sectionTitle} ${DESTINATION_NAMES[destination]}`;
-
   const selectSectionHandler = (section: ClickableServicesSelector) => setActiveSection(section);
 
   return (
     <Section title={title} text={sectionText} classes={sectionClasses} container>
-      <CardFilters
+      <Filters
         hideCardsSearchParam={hideCardsSearchParam}
         services={services}
         selectSectionHandler={selectSectionHandler}
@@ -54,13 +62,13 @@ export default function FilterServices({ sectionTitle, sectionText, destination,
   );
 }
 
-type CardFiltersProps = {
+type FiltersProps = {
   hideCardsSearchParam: string | null;
   services: ParsedService[];
   selectSectionHandler: (section: ClickableServicesSelector) => void;
 };
 
-function CardFilters({ hideCardsSearchParam, services, selectSectionHandler }: CardFiltersProps) {
+function Filters({ hideCardsSearchParam, services, selectSectionHandler }: FiltersProps) {
   return (
     <div className={`${hideCardsSearchParam ? "hidden" : "none"}`}>
       <div className="container grid grid-cols-1 gap-8 md:grid-cols-3">

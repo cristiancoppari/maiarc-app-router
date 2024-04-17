@@ -7,10 +7,13 @@ import { DESTINATION_KEYS } from "@/constants/destinations";
 import { notFound } from "next/navigation";
 import { unstable_setRequestLocale as setRequestLocale } from "next-intl/server";
 
+import FormContextProvider from "@/app/context/form-context";
+
 import Hero from "@/components/hero";
 import FilterServices from "@/components/filter-services";
 
-import { getDestinoPageData } from "@/data/fetchers";
+import { getContactPageData, getDestinoPageData } from "@/data/fetchers";
+import { getContactPageTranslations } from "@/lang/translations";
 
 export const metadata: Metadata = {
   title: "Maiarc Concierge - Destination",
@@ -34,6 +37,8 @@ export default async function DestinosPage({ params: { locale, destino } }: Expe
   setRequestLocale(locale);
 
   const destinoPageData = await getDestinoPageData(locale as Locale);
+  const contactPageData = await getContactPageData(locale as Locale);
+  const { form, messages } = await getContactPageTranslations();
 
   const { title, texts, heroImages, services } = destinoPageData;
 
@@ -66,10 +71,23 @@ export default async function DestinosPage({ params: { locale, destino } }: Expe
     };
   });
 
+  const formContent = {
+    form,
+    messages,
+  };
+
   return (
     <main>
       <Hero images={images}></Hero>
-      <FilterServices sectionTitle={title} sectionText={sectionText} destination={destino} services={parsedServices} />
+      <FormContextProvider initialValue={formContent}>
+        <FilterServices
+          sectionTitle={title}
+          sectionText={sectionText}
+          destination={destino}
+          services={parsedServices}
+          formContent={formContent}
+        />
+      </FormContextProvider>
     </main>
   );
 }
