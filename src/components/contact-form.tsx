@@ -53,12 +53,12 @@ const formSchema = z.object({
     .min(1, {
       message: "Tienes que ingresar un destino",
     }),
-  date_start: z
+  dateStart: z
     .date({
       required_error: "Tienes que ingresar una fecha",
     })
     .optional(),
-  date_end: z
+  dateEnd: z
     .date({
       required_error: "Tienes que ingresar una fecha",
     })
@@ -90,8 +90,9 @@ export default function ContactForm({ data }: ContactFormProps) {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log("values", values);
     toast.promise(
-      fetch("/api/send-mail", {
+      fetch("/api/send-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -186,7 +187,7 @@ export default function ContactForm({ data }: ContactFormProps) {
         <div className="flex gap-4">
           <FormField
             control={form.control}
-            name="date_start"
+            name="dateStart"
             render={({ field }) => (
               <FormItem className="flex w-full flex-col">
                 <FormLabel>{data.form.dateStart.label}</FormLabel>
@@ -199,7 +200,7 @@ export default function ContactForm({ data }: ContactFormProps) {
           />
           <FormField
             control={form.control}
-            name="date_end"
+            name="dateEnd"
             render={({ field }) => (
               <FormItem className="flex w-full flex-col">
                 <FormLabel>{data.form.dateEnd.label}</FormLabel>

@@ -44,12 +44,12 @@ const formSchema = z.object({
     .max(1000, {
       message: "El mensaje no puede tener más de 1000 caracteres",
     }),
-  date_start: z
+  dateStart: z
     .date({
       required_error: "Tienes que ingresar una fecha",
     })
     .optional(),
-  date_end: z
+  dateEnd: z
     .date({
       required_error: "Tienes que ingresar una fecha",
     })
@@ -91,7 +91,7 @@ export default function ReservationForm({ name, destination, data }: Reservation
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     toast.promise(
-      fetch("/api/send-mail", {
+      fetch("/api/send-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -191,7 +191,7 @@ export default function ReservationForm({ name, destination, data }: Reservation
         <div className="flex gap-4">
           <FormField
             control={form.control}
-            name="date_start"
+            name="dateStart"
             render={({ field }) => (
               <FormItem className="flex w-full flex-col">
                 <FormLabel>{data.form.dateStart.label}</FormLabel>
@@ -204,7 +204,7 @@ export default function ReservationForm({ name, destination, data }: Reservation
           />
           <FormField
             control={form.control}
-            name="date_end"
+            name="dateEnd"
             render={({ field }) => (
               <FormItem className="flex w-full flex-col">
                 <FormLabel>{data.form.dateEnd.label}</FormLabel>

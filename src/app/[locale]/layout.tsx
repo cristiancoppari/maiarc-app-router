@@ -1,4 +1,7 @@
 import { montserrat } from "@/constants/fonts";
+
+import { Toaster } from "sonner";
+
 import Header from "@/components/layout/header";
 import Footer from "@/components/footer";
 import WhatsappButton from "@/components/buttons/buttons";
@@ -11,7 +14,7 @@ export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
 }
 
-export default function RootLayout({
+export default function LocaleLayout({
   children,
   params: { locale },
 }: {
@@ -30,6 +33,9 @@ export default function RootLayout({
         <Header {...headerProps} />
         {children}
         <Footer content={content} />
+
+        <Toaster toastOptions={{ className: "toast" }} />
+
         <WhatsappButton />
       </body>
     </html>

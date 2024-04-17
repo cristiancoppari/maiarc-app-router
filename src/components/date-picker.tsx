@@ -17,10 +17,10 @@ type DatePickerProps = {
           phone: string;
           email: string;
           destinations: string;
-          date_start: Date | undefined;
-          date_end: Date | undefined;
+          dateStart: Date | undefined;
+          dateEnd: Date | undefined;
         },
-        "date_end"
+        "dateEnd"
       >
     | ControllerRenderProps<
         {
@@ -29,10 +29,10 @@ type DatePickerProps = {
           phone: string;
           email: string;
           destinations: string;
-          date_start: Date | undefined;
-          date_end: Date | undefined;
+          dateStart: Date | undefined;
+          dateEnd: Date | undefined;
         },
-        "date_start"
+        "dateStart"
       >;
 };
 
