@@ -52,7 +52,7 @@ export default function CardSlide({ service }: CardSlideProps) {
         />
 
         <div className="bg-zinc-100 p-6 text-slate-900">
-          <h4 className="h4 --font-lora mb-4 text-left">{service.name}</h4>
+          <h3 className="h4 --font-lora mb-4 text-left">{service.name}</h3>
           <div className="flex flex-col items-start gap-4">
             <div className="flex flex-wrap gap-4">
               {"capacity" in service && (

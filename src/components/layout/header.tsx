@@ -140,7 +140,7 @@ export default function Header({ leftNavKeys, rightNavKeys, destinationsKeys }: 
               })}
             </ul>
 
-            <Link href="/" className="hidden md:block">
+            <Link href="/" className="hidden md:block" aria-label="logo">
               <img src="/images/logo-gray.png" alt="" className="h-auto w-20" />
             </Link>
 

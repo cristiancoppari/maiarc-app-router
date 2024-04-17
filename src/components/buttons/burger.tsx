@@ -8,7 +8,12 @@ type BurgerProps = {
 
 function Burger({ onClick, isOpen, classes }: BurgerProps) {
   return (
-    <button type="button" className={cn("menu-toggle", classes, isOpen ? "open" : "")} onClick={onClick}>
+    <button
+      type="button"
+      className={cn("menu-toggle", classes, isOpen ? "open" : "")}
+      onClick={onClick}
+      aria-label="mobile menu button"
+    >
       <span />
       <span />
       <span />
