@@ -90,9 +90,8 @@ export default function ContactForm({ data }: ContactFormProps) {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("values", values);
     toast.promise(
-      fetch("/api/send-email", {
+      fetch(process.env.NEXT_PUBLIC_SEND_MAIL_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

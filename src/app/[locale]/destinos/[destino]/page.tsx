@@ -29,10 +29,6 @@ type ExperienciasUnicasPageProps = {
   };
 };
 
-export async function generateStaticParams() {
-  return DESTINATION_KEYS.map((destino) => ({ destino }));
-}
-
 export default async function DestinosPage({ params: { locale, destino } }: ExperienciasUnicasPageProps) {
   if (!DESTINATION_KEYS.includes(destino)) notFound();
 

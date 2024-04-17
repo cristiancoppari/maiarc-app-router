@@ -91,7 +91,7 @@ export default function ReservationForm({ name, destination, data }: Reservation
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     toast.promise(
-      fetch("/api/send-email", {
+      fetch(process.env.NEXT_PUBLIC_SEND_MAIL_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
