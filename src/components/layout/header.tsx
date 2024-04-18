@@ -110,6 +110,7 @@ export default function Header({ leftNavKeys, rightNavKeys, destinationsKeys }: 
                                 "nav-link grid place-items-center",
                                 // `/${router.query.destino as string}` === `/${item.href.split("/")[2]}` && "--active",
                               )}
+                              onClick={() => setIsMenuOpen(false)}
                               aria-label="navbar link"
                             >
                               <span>{item.label}</span>
@@ -129,6 +130,7 @@ export default function Header({ leftNavKeys, rightNavKeys, destinationsKeys }: 
                           "nav-link text-sm font-light uppercase text-slate-200 transition-all duration-300 ease-in-out hover:text-slate-100",
                           pathname === link.href && "--active",
                         )}
+                        onClick={() => setIsMenuOpen(false)}
                         aria-label="navbar link"
                       >
                         <span>{link.label}</span>
@@ -154,6 +156,7 @@ export default function Header({ leftNavKeys, rightNavKeys, destinationsKeys }: 
                         "nav-link text-sm font-light uppercase text-slate-200 transition-all duration-300 ease-in-out hover:text-slate-100",
                         pathname === link.href && "--active",
                       )}
+                      onClick={() => setIsMenuOpen(false)}
                     >
                       <span>{link.label}</span>
                       <Arrow classes="w-14 block mx-auto mt-1 arrow" />
