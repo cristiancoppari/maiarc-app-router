@@ -16,8 +16,8 @@ import { getContactPageTranslations, getCtasData } from "@/lang/translations";
 import { getHomeData, getVillas } from "@/data/fetchers";
 import { Locale } from "@/constants/locale";
 
-export const revalidate = 1;
-// export const dynamic = "force-dynamic";
+// export const revalidate = 1;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Maiarc Concierge Agency - Home",

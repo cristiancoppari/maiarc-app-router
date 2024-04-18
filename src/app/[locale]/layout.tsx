@@ -7,8 +7,8 @@ import Footer from "@/components/footer";
 import WhatsappButton from "@/components/buttons/buttons";
 import { useHeaderTranslations, useFooterTranslations } from "@/lang/translations";
 
-// export const dynamic = "force-dynamic";
-export const revalidate = 1;
+export const dynamic = "force-dynamic";
+// export const revalidate = 1;
 
 export default function LocaleLayout({
   children,
