@@ -6,10 +6,9 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/footer";
 import WhatsappButton from "@/components/buttons/buttons";
 import { useHeaderTranslations, useFooterTranslations } from "@/lang/translations";
-// import { unstable_setRequestLocale as setRequestLocale } from "next-intl/server";
-import { unstable_noStore } from "next/cache";
 
-// import { LOCALES } from "@/constants/locale";
+// export const dynamic = "force-dynamic";
+export const revalidate = 1;
 
 export default function LocaleLayout({
   children,
@@ -18,9 +17,6 @@ export default function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  // setRequestLocale(locale);
-  unstable_noStore();
-
   const { leftNavKeys, rightNavKeys, destinationsKeys } = useHeaderTranslations();
   const { content } = useFooterTranslations();
   const headerProps = { leftNavKeys, rightNavKeys, destinationsKeys };
