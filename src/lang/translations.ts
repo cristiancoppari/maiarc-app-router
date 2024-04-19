@@ -5,6 +5,7 @@ import { getTranslations } from "next-intl/server";
 const leftNavKeys = ["quienes-somos", "destinos", "real-estate"];
 const rightNavKeys = ["experiencias-unicas", "super-yates", "contacto"];
 const destinationsKeys = ["ibiza", "tulum", "punta-del-este", "miami"];
+const sectionKeys = ["section-1", "section-2", "section-3", "section-4", "section-5", "section-6", "section-7"];
 
 export function useHeaderTranslations() {
   const t = useTranslations("header.navbar");
@@ -92,5 +93,17 @@ export async function getContactPageTranslations() {
       error: t("messages.error"),
       sending: t("messages.sending"),
     },
+  };
+}
+
+export function usePoliticasDePrivacidadTranslations() {
+  const t = useTranslations("privacyPolicy");
+
+  return {
+    lastUpdatedAt: t("lastUpdated"),
+    sections: sectionKeys.map((key) => ({
+      title: t(`sections.${key}.title`),
+      content: t(`sections.${key}.content`),
+    })),
   };
 }

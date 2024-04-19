@@ -111,36 +111,35 @@
   "privacyPolicy": {
     "title": "Privacy Policy for Maiarc Concierge",
     "lastUpdated": "18/9/2023",
-    "description": "This Privacy Policy describes how your personal information is collected, used, and shared when you visit or make a purchase from Maiarc Concierge.",
-    "sections": [
-      {
+    "sections": {
+      "section-1": {
         "title": "1. Personal Information We Collect",
-        "content": "When you visit the Company, we automatically collect certain information about your device, including information about your web browser, IP address, time zone, and some of the cookies that are installed on your device. Additionally, as you browse the Company, we collect information about the individual web pages or products that you view, what websites or search terms referred you to the Company, and information about how you interact with the Company."
+        "content": "When you visit the Company, we automatically collect certain information about your device, including information about your web browser, IP address, time zone, and some of the cookies that are installed on your device. Additionally, as you browse the Company, we collect information about the individual web pages or products that you view, which websites or search terms referred you to the Company, and information about how you interact with the Company."
       },
-      {
+      "section-2": {
         "title": "2. How We Use Your Personal Information",
-        "content": "We use the information that we collect generally to fulfill any orders placed through the Company (including processing your payment information, arranging for shipping, and providing you with invoices and/or order confirmations). Additionally, we use this information to communicate with you, screen our orders for potential risk or fraud, and provide you with information or advertising relating to our products or services."
+        "content": "We generally use the information we collect to fulfill any orders placed through the Company (including processing your payment information, arranging for shipping, and providing you with invoices and/or order confirmations). Additionally, we use this information to communicate with you, screen our orders for potential risk or fraud, and provide you with information or advertising relating to our products or services."
       },
-      {
+      "section-3": {
         "title": "3. Sharing Your Personal Information",
         "content": "We share your Personal Information with third parties to help us use your Personal Information, as described above. We also use Google Analytics to help us understand how our customers use the Company."
       },
-      {
+      "section-4": {
         "title": "4. Your Rights",
-        "content": "If you are a European resident, you have the right to access the personal information we hold about you and to ask that your personal information be corrected, updated, or deleted. If you would like to exercise this right, please contact us through the contact information below."
+        "content": "If you are a European resident, you have the right to access personal information we hold about you and to ask that your personal information be corrected, updated, or deleted. If you wish to exercise this right, please contact us through the contact information below."
       },
-      {
+      "section-5": {
         "title": "5. Data Retention",
-        "content": "When you place an order through the Company, we will maintain your order information for our records unless and until you ask us to delete this information."
+        "content": "When you place an order through the Company, we will maintain your Order Information in our records unless and until you ask us to delete this information."
       },
-      {
+      "section-6": {
         "title": "6. Changes",
-        "content": "We may update this privacy policy from time to time in order to reflect changes to our practices or for other operational, legal, or regulatory reasons."
+        "content": "We may update this privacy policy from time to time in order to reflect, for example, changes to our practices or for other operational, legal, or regulatory reasons."
       },
-      {
+      "section-7": {
         "title": "7. Contact Us",
-        "content": "For more information about our privacy practices, if you have questions, or if you would like to make a complaint, please contact us by e-mail at [your email] or by mail using the details provided below: [Your Address]"
+        "content": "For more information about our privacy practices, if you have questions, or if you would like to make a complaint, please contact us by email at [your email] or by mail using the details provided below: [Your Address]"
       }
-    ]
+    }
   }
 }
