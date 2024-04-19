@@ -33,6 +33,13 @@ type HomePageProps = {
 export default async function HomePage({ params: { locale } }: HomePageProps) {
   const homeData = await getHomeData(locale as Locale);
   const villas = await getVillas();
+
+  const orderedVillas = villas.sort((a, b) => {
+    const orderA = a.order === 0 || a.order === null || a.order === undefined ? Infinity : a.order;
+    const orderB = b.order === 0 || b.order === null || b.order === undefined ? Infinity : b.order;
+    return orderA - orderB;
+  });
+
   const { form, messages } = await getContactPageTranslations();
 
   const { more, subscription } = await getCtasData();
@@ -67,7 +74,7 @@ export default async function HomePage({ params: { locale } }: HomePageProps) {
         }}
       >
         <Section title={accommodationsBlock.title} text={accommodationsBlock.text} classes="bg-zinc-200">
-          <LuxuryAccommodationsResultsCarousel villas={villas} />
+          <LuxuryAccommodationsResultsCarousel villas={orderedVillas} />
         </Section>
       </FormContextProvider>
 

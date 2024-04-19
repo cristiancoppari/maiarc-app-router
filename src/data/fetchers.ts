@@ -325,7 +325,7 @@ export async function getHotels() {
 export async function getVillas() {
   try {
     const res = await fetch(
-      `${process.env.API_URL}/villas/?fields=name&fields=locale&fields=capacity&fields=rooms&fields=includes_breakfast&populate[main_image][fields]=url&populate[images][fields]=url&fields=location&populate[destination][fields]=name&fields=uuid`,
+      `${process.env.API_URL}/villas/?fields=name&fields=locale&fields=capacity&fields=rooms&fields=includes_breakfast&populate[main_image][fields]=url&populate[images][fields]=url&fields=location&populate[destination][fields]=name&fields=uuid&fields=order`,
     );
 
     if (!res.ok) throw new Error("Failed to fetch villas");
@@ -346,6 +346,7 @@ export async function getVillas() {
         capacity: element.attributes.capacity,
         includesBreakfast: element.attributes.includes_breakfast,
         uuid: element.attributes.uuid,
+        order: element.attributes.order,
       };
     });
 
