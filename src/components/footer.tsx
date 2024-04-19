@@ -9,11 +9,11 @@ const social: Array<{ icon: string; link: string }> = [
   },
   {
     icon: "/images/instagram.svg",
-    link: "https://www.instagram.com/maiarc.concierge",
+    link: "https://www.instagram.com/maiarc.conciergeagency",
   },
   {
     icon: "/images/whatsapp.svg",
-    link: "https://www.whatsapp.com",
+    link: "https://api.whatsapp.com/send?phone=529842028334",
   },
 ];
 

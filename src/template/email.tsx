@@ -2,7 +2,7 @@ import { type FC } from "react";
 
 type TContactFormData = {
   name: string;
-  mail: string;
+  email: string;
   phone: string;
   message: string;
   service?: string;
@@ -16,7 +16,7 @@ type EmailTemplateProps = {
 };
 
 export const EmailTemplate: FC<Readonly<EmailTemplateProps>> = ({
-  data: { name, mail, phone, message, service, dateStart, dateEnd, destination },
+  data: { name, email, phone, message, service, dateStart, dateEnd, destination },
 }) => {
   let dateStartParsed = "";
   let dateEndParsed = "";
@@ -36,7 +36,7 @@ export const EmailTemplate: FC<Readonly<EmailTemplateProps>> = ({
     <div>
       <h2>Nuevo contacto a través de la web 📬:</h2>
       <p>Nombre: {name}</p>
-      <p>Email: {mail}</p>
+      <p>Email: {email}</p>
       <p>Teléfono: {phone}</p>
       <p>Mensaje: {message}</p>
       {service ? <p>Consulta por: {service}</p> : ""}
