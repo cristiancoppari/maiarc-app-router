@@ -13,8 +13,7 @@ export async function POST(request: NextRequest) {
   try {
     const { data, error } = await resend.emails.send({
       from: "maiarc@resend.dev",
-      // to: process.env.MAIL_TO,
-      to: "cristian.coppari@gmail.com",
+      to: process.env.MAIL_TO,
       subject: "Maiarc Concierge Agency - Nuevo mensaje de contacto 📬",
       react: EmailTemplate({
         data: parsedRequest,
