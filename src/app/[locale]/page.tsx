@@ -10,6 +10,7 @@ import ClickableServices from "@/components/clickable-services";
 import { CarouselServices, LuxuryAccommodationsResultsCarousel } from "@/components/carousel";
 import { LinkButton } from "@/components/buttons/buttons";
 import BigGallery from "@/components/big-gallery";
+import InstagramGallery from "@/components/instagram-gallery";
 import Newsletter from "@/components/newsletter";
 
 import { getContactPageTranslations, getCtasData } from "@/lang/translations";
@@ -79,7 +80,9 @@ export default async function HomePage({ params: { locale } }: HomePageProps) {
       </FormContextProvider>
 
       <Section title={communityBlock.title} text={communityBlock.text} container>
-        {/* Community */}
+        <InstagramGallery
+          images={["/images/instagram-1.jpeg", "/images/instagram-2.jpeg", "/images/instagram-3.jpeg"]}
+        />
       </Section>
 
       <Newsletter title={newsletterBlock.title} text={newsletterBlock.text} cta={subscription} />
